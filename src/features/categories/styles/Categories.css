@@ -1,0 +1,181 @@
+/* ---- category card ---- */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.category-card__image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: var(--bg-alt);
+  border: 1px solid var(--bg-alt);
+  transition: box-shadow 0.2s ease;
+}
+.category-card:hover .category-card__image { box-shadow: 0 10px 30px rgba(61, 21, 38, 0.12); }
+.category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.category-card:hover .category-card__image img { transform: scale(1.05); }
+.category-card__no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.category-card__name {
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+.category-card:hover .category-card__name { color: var(--primary); }
+
+/* ---- circle variant — used on AllCategoriesPage ---- */
+.category-card--circle .category-card__image,
+.category-card--circle .category-card__no-image {
+  border-radius: 999px;
+}
+
+/* ---- shared grid used by home categories / all categories / subcategories ---- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+@media (min-width: 640px) { .category-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .category-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .category-grid--wide { grid-template-columns: repeat(6, 1fr); } }
+@media (min-width: 1024px) { .category-grid--home { grid-template-columns: repeat(6, 1fr); } }
+
+/* ---- "View All" tile at the end of the homepage grid ---- */
+.category-card--more .category-card__image--more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-alt);
+  border: 1.5px dashed var(--primary);
+}
+.category-card--more .category-card__more-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background-color: var(--bg);
+  color: var(--primary);
+  transition: transform 0.2s ease;
+}
+.category-card--more:hover .category-card__more-icon {
+  transform: translateX(3px);
+}
+.category-card--more .category-card__name {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.category-grid__skeleton {
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  background-color: var(--bg-alt);
+  animation: cat-pulse 1.5s ease-in-out infinite;
+}
+.category-grid__skeleton--circle {
+  border-radius: 999px;
+}
+@keyframes cat-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.category-grid__empty { font-size: 0.875rem; color: var(--text-muted); }
+.category-grid__error { font-size: 0.875rem; color: #B03A48; }
+
+/* ---- all categories page ---- */
+.all-categories-page {
+  min-height: 100vh;
+  background-color: var(--bg);
+  padding: 2rem 1rem;
+}
+@media (min-width: 768px) { .all-categories-page { padding: 2.5rem 2.5rem; } }
+.all-categories-page__title {
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- category subcategories page / hero banner ---- */
+.category-hero {
+  position: relative;
+  height: 14rem;
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--primary);
+  overflow: hidden; /* NEW: keeps the two bg layers from bleeding outside the hero */
+}
+@media (min-width: 768px) { .category-hero { height: 18rem; } }
+
+/* NEW: two full-size layers stacked behind the overlay/title. Only one
+   is visible at a time — the media query below swaps them. Using
+   separate elements (not a single background-image swapped via CSS
+   var) so each can point at a genuinely different cropped file. */
+.category-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.category-hero__bg--mobile { display: none; }
+
+@media (max-width: 767px) {
+  .category-hero__bg--desktop { display: none; }
+  .category-hero__bg--mobile { display: block; }
+}
+
+.category-hero__overlay {
+  position: relative; /* NEW: sits above the .category-hero__bg layers */
+  z-index: 1;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+@media (min-width: 768px) { .category-hero__overlay { padding: 2.5rem; } }
+.category-hero__title {
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  color: var(--text-light);
+}
+.category-hero__desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  opacity: 0.9;
+  margin-top: 0.25rem;
+  max-width: 36rem;
+}
+.category-hero__skeleton {
+  height: 14rem;
+  background-color: var(--bg-alt);
+  animation: cat-pulse 1.5s ease-in-out infinite;
+}
+@media (min-width: 768px) { .category-hero__skeleton { height: 18rem; } }
+
+.category-sub-body { padding: 2rem 1rem; }
+@media (min-width: 768px) { .category-sub-body { padding: 2.5rem 2.5rem; } }
+.category-sub-body__heading {
+  font-family: var(--font-headline);
+  font-size: 1.375rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}

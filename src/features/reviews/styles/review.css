@@ -1,0 +1,342 @@
+/* ============================================================
+   review.css — Customer Reviews section (ReviewsSection.jsx)
+   Matches the cream / brown-gold theme used across the app.
+   ============================================================ */
+
+.reviews-section {
+  margin-top: 40px;
+  padding: 28px 0;
+  margin-left: 4.5rem;
+}
+
+/* ---------- Header ---------- */
+.reviews-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.reviews-section__heading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2B2320;
+  margin: 0;
+}
+
+.reviews-section__write-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid #A9825A;
+  background: #FFFFFF;
+  color: #7A5B37;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.reviews-section__write-btn:hover {
+  background: #7A5B37;
+  color: #FFFFFF;
+}
+
+/* ---------- Hint / status text ---------- */
+.reviews-section__hint {
+  font-size: 14px;
+  color: #8A7A68;
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  background: #F3E9DC;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.reviews-section__empty {
+  font-size: 14.5px;
+  color: #8A7A68;
+  padding: 24px 0;
+  text-align: center;
+}
+
+/* ---------- Review form (write a review) ---------- */
+.review-form {
+  background: #FFFFFF;
+  border: 1px solid #ECE0D1;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 10px rgba(43, 35, 32, 0.05);
+}
+
+.review-form__error {
+  color: #B3413E;
+  font-size: 13.5px;
+  background: #FBEAE9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 0 0 16px;
+}
+
+.review-form__row {
+  margin-bottom: 18px;
+}
+
+.review-form__row label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5C4B3A;
+  margin-bottom: 8px;
+}
+
+.review-form__row input,
+.review-form__row textarea {
+  width: 100%;
+  border: 1px solid #E1D4C2;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #2B2320;
+  background: #FDFAF6;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.review-form__row input:focus,
+.review-form__row textarea:focus {
+  outline: none;
+  border-color: #A9825A;
+  background: #FFFFFF;
+}
+
+.review-form__stars {
+  display: flex;
+  gap: 4px;
+}
+
+.review-form__star {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  color: #E1D4C2;
+  padding: 0;
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+
+.review-form__star.is-filled {
+  color: #C9963E;
+}
+
+.review-form__star:hover {
+  transform: scale(1.1);
+}
+
+.review-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.review-form__cancel {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid #E1D4C2;
+  background: #FFFFFF;
+  color: #6B5B4A;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.review-form__cancel:hover {
+  background: #F7F0E7;
+}
+
+.review-form__submit {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  background: #7A5B37;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.review-form__submit:hover {
+  background: #634A2C;
+}
+
+.review-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Review list ---------- */
+.reviews-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.review-item {
+  background: #FFFFFF;
+  border: 1px solid #ECE0D1;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 10px rgba(43, 35, 32, 0.04);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+}
+
+.review-item__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+/* Avatar-style initial circle before the reviewer name */
+.review-item__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2B2320;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-item__name::before {
+  content: attr(data-initial);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #F3E9DC;
+  color: #7A5B37;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.review-item__comment {
+  font-size: 14px;
+  color: #4A3F35;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-item__date {
+  font-size: 12px;
+  color: #A8998A;
+  margin-top: auto;
+}
+
+/* ---------- Star rating (read-only display) ---------- */
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #C9963E;
+}
+
+.star-rating__stars {
+  display: inline-flex;
+}
+
+.star-rating__value {
+  font-size: 12.5px;
+  color: #8A7A68;
+  font-weight: 600;
+}
+
+/* ---------- Pagination ---------- */
+.reviews-section__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: #6B5B4A;
+}
+
+.reviews-section__pagination button {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid #E1D4C2;
+  background: #FFFFFF;
+  color: #5C4B3A;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.reviews-section__pagination button:hover:not(:disabled) {
+  background: #F7F0E7;
+}
+
+.reviews-section__pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Mobile fix ----------
+   Root cause of the review section overflowing off-screen on mobile:
+   .reviews-section has a fixed `margin-left: 4.5rem` (72px) meant for
+   desktop indentation. On narrow viewports that pushes the whole
+   section 72px to the right with no matching space freed up on the
+   right, so it runs past the edge of the screen. Below 768px we drop
+   that margin and use normal horizontal padding instead, matching the
+   page's own mobile padding (see .product-detail-page in
+   ProductDetail.css) so the section stays flush with the rest of the
+   page content instead of overflowing. */
+@media (max-width: 768px) {
+  .reviews-section {
+    margin-left: 0;
+    padding: 28px 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-section__heading {
+    font-size: 21px;
+  }
+  .review-form {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .reviews-list {
+    grid-template-columns: 1fr;
+  }
+  .review-item {
+    padding: 16px;
+    border-radius: 12px;
+    min-height: unset;
+  }
+}

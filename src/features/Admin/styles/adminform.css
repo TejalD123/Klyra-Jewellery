@@ -1,0 +1,611 @@
+/* product form */
+
+/* ---- Contained width — CRITICAL: without this the form stretches
+   edge-to-edge on wide screens. Wrap all sections in this div. ---- */
+.admin-form-container {
+  max-width: 900px;
+  margin-top:10px;
+}
+
+/* ---- Two-column section layout (General Info | Hero Image side by side,
+   Luxury Attributes | Hierarchy & Status side by side — per reference) ---- */
+.admin-form-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+.admin-form-col {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 760px) {
+  .admin-form-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Page action bar (sticky top: Back link + Discard/Save) ---- */
+.admin-form-page {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.admin-form-actionbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  background: var(--admin-cream);
+}
+.admin-form-actionbar__title {
+  font-family: var(--admin-font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+.admin-form-actionbar__buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* ---- Section card (replaces the generic .admin-card for forms) ---- */
+.admin-form-section {
+  background: var(--admin-surface, #fff);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius, 16px);
+  box-shadow: var(--admin-shadow, 0 2px 8px rgba(58,35,24,0.06));
+  overflow: hidden;
+  margin-bottom: 1.75rem;
+  transition: box-shadow 0.2s ease;
+}
+.admin-form-section:hover {
+  box-shadow: 0 4px 18px rgba(58, 35, 24, 0.1);
+}
+
+/* Tinted header bar with icon — matches "General Information" bars in the images */
+.admin-form-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 1.5rem;
+  background: var(--admin-cream-dim, #F5E4D9);
+  border-bottom: 1px solid var(--admin-border, #EFDCCD);
+}
+.admin-form-section__header svg {
+  color: var(--rust-brown);
+  flex-shrink: 0;
+}
+.admin-form-section__title {
+  font-family: var(--admin-font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.admin-form-section__body {
+  padding: 1.5rem;
+}
+
+/* ---- Error banner ---- */
+.admin-form-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--admin-radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Grid ---- */
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+.admin-form-grid--full { grid-column: 1 / -1; }
+.admin-form-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 720px) {
+  .admin-form-grid,
+  .admin-form-grid--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Field ---- */
+.admin-field {
+  display: flex;
+  flex-direction: column;
+}
+.admin-field label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.4rem;
+}
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  background: var(--admin-cream, #FBF1EA);
+  border: 1.5px solid var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius-sm, 10px);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.875rem;
+  color: var(--admin-text, #3A2318);
+  font-family: var(--admin-font-body, inherit);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+}
+.admin-field input::placeholder,
+.admin-field textarea::placeholder { color: #C0A897; }
+.admin-field input:hover,
+.admin-field select:hover,
+.admin-field textarea:hover {
+  border-color: var(--admin-gold-soft, #FDAE8B);
+}
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: none;
+  background: var(--admin-surface, #fff);
+  border-color: var(--atomic-tangerine, #FC6E3A);
+  box-shadow: 0 0 0 3px var(--admin-gold-dim, rgba(252,110,58,0.14));
+}
+.admin-field select { cursor: pointer; }
+.admin-field .admin-field-error { border-color: var(--admin-danger) !important; }
+
+/* Read-only "slug" style field seen in the images */
+.admin-field input.is-slug {
+  background: var(--admin-cream-dim, #F5E4D9);
+  color: var(--admin-text-muted, #9C8577);
+}
+
+/* ---- Pill / chip selector row (Available Sizes, Metal Types radio cards) ---- */
+.admin-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.admin-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.admin-chip:hover { border-color: var(--atomic-tangerine); }
+.admin-chip.is-selected {
+  background: var(--rust-brown);
+  border-color: var(--rust-brown);
+  color: #fff;
+}
+.admin-chip-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.5rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1.5px dashed var(--admin-border);
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  background: transparent;
+}
+.admin-chip-add:hover { border-color: var(--rust-brown); color: var(--rust-brown); }
+
+/* ---- Radio card (Metal Types in Category form) ---- */
+.admin-radio-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border: 1.5px solid var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius-sm, 10px);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--admin-text-muted, #9C8577);
+  background: var(--admin-surface, #fff);
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.admin-radio-card:hover { border-color: var(--atomic-tangerine, #FC6E3A); }
+.admin-radio-card.is-selected {
+  border-color: var(--rust-brown, #992C05);
+  background: var(--admin-gold-dim, rgba(252,110,58,0.1));
+  color: var(--rust-brown, #992C05);
+}
+
+/* Custom checkbox — hides the native square box, draws its own rounded
+   box + checkmark so it never looks like an unstyled browser checkbox */
+.admin-radio-card input[type="checkbox"],
+.admin-radio-card input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--admin-border, #EFDCCD);
+  background: var(--admin-surface, #fff);
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.admin-radio-card input[type="radio"] { border-radius: 999px; }
+.admin-radio-card input[type="checkbox"]:checked,
+.admin-radio-card input[type="radio"]:checked {
+  background: var(--rust-brown, #992C05);
+  border-color: var(--rust-brown, #992C05);
+}
+.admin-radio-card input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.admin-radio-card input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* ---- Highlighted computed value (Estimated Retail Price banner) ---- */
+.admin-computed-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-gold-dim);
+  border: 1px solid var(--admin-gold-soft);
+}
+.admin-computed-banner__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--rusty-spice);
+}
+.admin-computed-banner__value {
+  font-family: var(--admin-font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rust-brown);
+}
+
+/* ---- Dropzone (image upload) ---- */
+.admin-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border: 1.5px dashed var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-cream);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.admin-dropzone:hover { border-color: var(--atomic-tangerine); }
+.admin-dropzone svg { color: var(--admin-text-muted); }
+.admin-dropzone__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+.admin-dropzone__hint {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+.admin-dropzone input[type="file"] { display: none; }
+
+.admin-thumb-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.admin-thumb {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border);
+  background: var(--admin-cream-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--admin-text-muted);
+  position: relative;
+}
+.admin-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.admin-thumb-add {
+  border: 1.5px dashed var(--admin-border);
+  cursor: pointer;
+  color: var(--admin-text-muted);
+}
+.admin-thumb-add:hover { border-color: var(--rust-brown); color: var(--rust-brown); }
+
+/* ---- Toggle switch (Live on Storefront / Is Active) ---- */
+.admin-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.admin-toggle-row__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+.admin-toggle-row__hint {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+}
+.admin-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--admin-border);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+.admin-toggle.is-on { background: var(--rust-brown); }
+.admin-toggle__dot {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.admin-toggle.is-on .admin-toggle__dot { transform: translateX(1.25rem); }
+
+/* ---- Marketing flags / checkbox list ---- */
+.admin-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.admin-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--admin-text);
+  cursor: pointer;
+}
+.admin-checkbox-row input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1.5px solid var(--admin-border, #EFDCCD);
+  background: var(--admin-surface, #fff);
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.admin-checkbox-row input:checked {
+  background: var(--rust-brown, #992C05);
+  border-color: var(--rust-brown, #992C05);
+}
+.admin-checkbox-row input:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ---- Footer submit row (used inside inline forms, e.g. Categories.jsx list page) ---- */
+.admin-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+/* =========================================================================
+   ADDITIONS — append to the END of adminform.css (the boxed/wizard-style
+   version, the one with .admin-form-section, .admin-radio-card,
+   .admin-dropzone etc). Do NOT also load the older underline-style
+   adminform.css/categoryform.css alongside this one — having both loaded
+   redefines the same class names and causes inconsistent box styling.
+   ========================================================================= */
+
+/* ---- Taller image dropzone (Hero Image box) ---- */
+.admin-dropzone {
+  padding: 3.5rem 1.5rem;
+  min-height: 230px;
+}
+
+/* ---- Custom metal type chips (removable tags, shown under the
+   "+ Add Custom Metal" button). Named .admin-metal-chip specifically so
+   it doesn't collide with the existing .admin-chip (used for the
+   selectable size/metal pill buttons elsewhere). ---- */
+.admin-metal-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+.admin-metal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--admin-cream-dim, #F5E4D9);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  color: var(--admin-text, #3A2318);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+.admin-metal-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: none;
+  background: transparent;
+  color: var(--admin-text-muted, #9C8577);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.admin-metal-chip__remove:hover {
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+}
+
+/* ---- Optional: let the form use the page's full width instead of the
+   900px cap. Remove this block if you want to keep the narrower,
+   centered wizard look from the reference screenshots. ---- */
+.admin-form-container {
+  max-width: 100%;
+}
+
+/* =========================================================================
+   ADDITIONS — append these to categoryform.css (existing file untouched
+   above this point). Adds: custom metal type input + removable chips,
+   and a wider full-width variant of the form container.
+   ========================================================================= */
+
+/* ---- Page wrapper takes the full available width (no side padding
+   fighting with an outer max-width somewhere else in admincard.css) ---- */
+.admin-page-full {
+  width: 100%;
+}
+
+/* ---- Wider form container: same structure, just stretches further and
+   the two columns get more breathing room + wider fields ---- */
+.admin-form-container--wide {
+  width: 100%;
+  max-width: none;
+}
+.admin-form-container--wide .admin-form-columns {
+  gap: 2.5rem;
+}
+.admin-form-container--wide .admin-form-grid {
+  gap: 1.5rem 2.75rem;
+}
+.admin-form-container--wide .admin-field input,
+.admin-form-container--wide .admin-field select,
+.admin-form-container--wide .admin-field textarea {
+  font-size: 0.95rem;
+  padding: 0.65rem 0.15rem;
+}
+
+/* ---- Custom metal type: text input + Add button row ---- */
+.admin-custom-metal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+}
+.admin-custom-metal-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--admin-border);
+  padding: 0.55rem 0.1rem;
+  font-size: 0.9rem;
+  color: var(--admin-text);
+  font-family: var(--admin-font-body);
+  transition: border-color 0.2s ease;
+}
+.admin-custom-metal-row input:focus {
+  outline: none;
+  border-bottom-color: var(--admin-gold);
+}
+.admin-custom-metal-row .admin-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ---- Chips for custom metal types already added to the form ---- */
+.admin-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+.admin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--admin-cream-dim);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.55rem 0.35rem 0.75rem;
+  border-radius: 999px;
+}
+.admin-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: none;
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.admin-chip__remove:hover {
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+}

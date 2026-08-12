@@ -1,0 +1,256 @@
+/* ============================================================
+   DELIVERY AGENCY FORM — used by DeliveryAgencies.jsx
+   Sectioned panel layout, mirrors the Products edit page.
+   Depends on tokens from admin.css (--admin-*)
+   ============================================================ */
+
+.da-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .da-layout { grid-template-columns: 1fr; }
+}
+
+.da-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---- Panel shell: colored header bar + white body, like Products page ---- */
+.da-panel {
+  background: var(--admin-surface, #fff);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius, 16px);
+  overflow: hidden;
+}
+.da-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--admin-cream-dim, #FBF6F2);
+  border-bottom: 1px solid var(--admin-border, #EFDCCD);
+  color: var(--admin-gold, #FC6E3A);
+}
+.da-panel__header h3 {
+  font-family: var(--admin-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  margin: 0;
+}
+.da-panel__header-action {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  background: var(--admin-surface, #fff);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.da-panel__header-action:hover {
+  border-color: var(--admin-gold, #FC6E3A);
+  color: var(--admin-gold, #FC6E3A);
+}
+.da-panel__body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.da-panel__hint {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+  margin: -0.5rem 0 0;
+}
+
+/* ---- Fields ---- */
+.da-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+@media (max-width: 560px) {
+  .da-form-grid { grid-template-columns: 1fr; }
+}
+
+.da-field label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.4rem;
+}
+.da-field__hint {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--admin-text-muted);
+  margin-top: 0.35rem;
+}
+
+.da-field input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--admin-radius-sm, 8px);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  background: var(--admin-cream-dim, #FBF6F2);
+  color: var(--admin-text);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.da-field input:focus-visible {
+  outline: none;
+  border-color: var(--admin-gold, #FC6E3A);
+  background: var(--admin-surface, #fff);
+}
+.da-field--money { position: relative; }
+.da-field--money input { padding-left: 1.75rem; }
+.da-field--money::before {
+  content: "₹";
+  position: absolute;
+  left: 0.75rem;
+  top: 2.35rem;
+  color: var(--admin-text-muted);
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+/* Kill the browser's blue/yellow autofill background so every field looks
+   the same regardless of what the browser thinks it recognizes. */
+.da-field input:-webkit-autofill,
+.da-rate-row input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--admin-cream-dim, #FBF6F2) inset;
+  -webkit-text-fill-color: var(--admin-text);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ---- State-wise rate rows ---- */
+.da-rates-empty {
+  font-size: 0.8125rem;
+  color: var(--admin-text-muted);
+  background: var(--admin-cream-dim, #FBF6F2);
+  border: 1px dashed var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius-sm, 8px);
+  padding: 0.75rem 1rem;
+}
+.da-rate-row {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 0.625rem;
+  align-items: center;
+}
+.da-rate-row input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--admin-radius-sm, 8px);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  background: var(--admin-cream-dim, #FBF6F2);
+  color: var(--admin-text);
+}
+.da-rate-row input:focus-visible {
+  outline: none;
+  border-color: var(--admin-gold, #FC6E3A);
+  background: var(--admin-surface, #fff);
+}
+.da-rate-remove {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--admin-radius-sm, 8px);
+  border: 1px solid var(--admin-border, #EFDCCD);
+  background: var(--admin-surface, #fff);
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.da-rate-remove:hover {
+  border-color: var(--admin-danger);
+  color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+}
+
+/* ---- Logo upload drop zone ---- */
+.da-logo-drop {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 10rem;
+  border: 1.5px dashed var(--admin-border, #EFDCCD);
+  border-radius: var(--admin-radius-sm, 8px);
+  background: var(--admin-cream-dim, #FBF6F2);
+  color: var(--admin-text-muted);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.da-logo-drop:hover {
+  border-color: var(--admin-gold, #FC6E3A);
+  background: var(--admin-surface, #fff);
+}
+.da-logo-drop img {
+  width: 100%;
+  height: 100%;
+  max-height: 10rem;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+/* Small logo thumbnail shown in the agency list table */
+.da-table-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--admin-border, #EFDCCD);
+  flex-shrink: 0;
+}
+
+/* ---- Active toggle row ---- */
+.da-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+/* ---- Error + form-level actions ---- */
+.da-form-error {
+  font-size: 0.8125rem;
+  color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+  border-radius: var(--admin-radius-sm, 8px);
+  padding: 0.65rem 0.9rem;
+}
+.da-form-actions {
+  display: flex;
+  gap: 0.75rem;
+}

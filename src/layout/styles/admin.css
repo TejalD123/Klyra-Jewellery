@@ -1,0 +1,237 @@
+/* =========================================================================
+   ADMIN DESIGN TOKENS + COMMON COMPONENTS — Klyra Admin
+   Import this FIRST, before AdminSidebar.css / AdminTopbar.css /
+   AdminCard.css / AdminForm.css / AdminMobileNav.css.
+
+   Button, Badge, and Table styles now live HERE (not separate files)
+   since they're used everywhere and are small — per your request to
+   cut down the number of CSS files.
+   ========================================================================= */
+
+:root {
+  /* ---- Brand palette (rust / mahogany) ---- */
+  --rust-brown: #992C05;
+  --rich-mahogany: #42190B;
+  --dark-walnut: #66260E;
+  --atomic-tangerine: #FC6E3A;
+  --rusty-spice: #AB3E16;
+
+  /* ---- Core surface colors ---- */
+  --admin-ink: var(--rich-mahogany);      /* sidebar background */
+  --admin-ink-soft: rgba(255, 255, 255, 0.07); /* sidebar hover/active row */
+  --admin-ink-line: rgba(255, 255, 255, 0.08); /* hairline dividers on dark */
+
+  --admin-cream: #FBF1EA;        /* main content background */
+  --admin-cream-dim: #F5E4D9;    /* section-header tint / alt row bg */
+  --admin-surface: #FFFFFF;      /* raised card surface */
+  --admin-border: #EFDCCD;       /* hairline dividers on light surface */
+
+  /* ---- Accent (used sparingly — active nav, focus, highlights) ---- */
+  --admin-gold: var(--atomic-tangerine);
+  --admin-gold-soft: #FDAE8B;
+  --admin-gold-dim: rgba(252, 110, 58, 0.14);
+  --admin-primary: var(--rust-brown);
+
+  /* ---- Text ---- */
+  --admin-text: #3A2318;
+  --admin-text-muted: #9C8577;
+  --admin-text-on-dark: #F5E9E1;
+  --admin-text-on-dark-muted: rgba(245, 233, 225, 0.6);
+
+  /* ---- Status colors (badges, data-viz) ---- */
+  --admin-success: #3F7D53;
+  --admin-success-bg: #E6F1E9;
+  --admin-warning: #B67A2A;
+  --admin-warning-bg: #FBEEDD;
+  --admin-danger: #B23B3B;
+  --admin-danger-bg: #FBE9E9;
+  --admin-info: #3A6EA5;
+  --admin-info-bg: #E9F0F9;
+
+  /* ---- Type ---- */
+  --admin-font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --admin-font-body: "Inter", "Manrope", -apple-system, sans-serif;
+
+  /* ---- Layout ---- */
+  --admin-sidebar-w: 240px;
+  --admin-topbar-h: 64px;
+  --admin-mobilenav-h: 60px;
+  --admin-radius: 14px;
+  --admin-radius-sm: 8px;
+  --admin-shadow: 0 1px 2px rgba(58, 35, 24, 0.05), 0 12px 30px -8px rgba(58, 35, 24, 0.12);
+}
+
+/* ============================================================
+   BASE SHELL
+   ============================================================ */
+.admin-shell {
+  font-family: var(--admin-font-body);
+  color: var(--admin-text);
+  background: var(--admin-cream);
+  min-height: 100vh;
+}
+
+.admin-heading {
+  font-family: var(--admin-font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--admin-text);
+}
+
+/* Utility: spacing helpers used across pages (kept minimal, no Tailwind dependency) */
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--admin-radius-sm);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+  font-family: var(--admin-font-body);
+}
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-btn-primary {
+  background: var(--rust-brown);
+  color: #fff;
+  border: 1px solid var(--rust-brown);
+}
+.admin-btn-primary:hover:not(:disabled) {
+  background: var(--rusty-spice);
+  border-color: var(--rusty-spice);
+}
+
+.admin-btn-accent {
+  background: var(--atomic-tangerine);
+  color: #fff;
+  border: 1px solid var(--atomic-tangerine);
+}
+.admin-btn-accent:hover:not(:disabled) { opacity: 0.9; }
+
+.admin-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+}
+.admin-btn-ghost:hover:not(:disabled) {
+  border-color: var(--rust-brown);
+  color: var(--rust-brown);
+}
+
+.admin-btn-danger {
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+  border: 1px solid transparent;
+}
+.admin-btn-danger:hover:not(:disabled) {
+  background: var(--admin-danger);
+  color: #fff;
+}
+
+/* ============================================================
+   BADGE
+   ============================================================ */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  text-transform: capitalize;
+  border: none;
+}
+.admin-badge-success { background: var(--admin-success-bg); color: var(--admin-success); }
+.admin-badge-warning  { background: var(--admin-warning-bg); color: var(--admin-warning); }
+.admin-badge-danger   { background: var(--admin-danger-bg);  color: var(--admin-danger); }
+.admin-badge-info     { background: var(--admin-info-bg);    color: var(--admin-info); }
+.admin-badge-neutral  { background: var(--admin-cream-dim);  color: var(--admin-text-muted); }
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.admin-table thead th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--admin-text-muted);
+  border-bottom: 1px solid var(--admin-border);
+  font-weight: 700;
+}
+.admin-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  vertical-align: middle;
+}
+.admin-table tbody tr:last-child td { border-bottom: none; }
+.admin-table tbody tr { transition: background-color 0.15s ease; }
+.admin-table tbody tr:hover { background: var(--admin-cream-dim); }
+
+/* ============================================================
+   RESPONSIVE — content area / mobile bottom nav spacing
+   ============================================================ */
+.admin-main {
+  min-height: 100vh;
+  margin-left: var(--admin-sidebar-w);
+  transition: margin-left 0.2s ease;
+}
+.admin-main__inner {
+  padding: 1.5rem 2rem 3rem;
+}
+
+@media (max-width: 900px) {
+  .admin-main {
+    margin-left: 0;
+  }
+  .admin-main__inner {
+    padding: 1rem 1rem 2rem;
+  }
+
+  /* ---- Bottom-nav pin fix ----
+     position:fixed on the nav breaks on mobile Safari/Chrome because the
+     address bar expands/collapses and changes the *visual* viewport
+     height without changing the layout viewport used for fixed
+     positioning — so the nav ends up off-screen until you scroll and the
+     address bar collapses. Instead, .admin-shell becomes a fixed-height
+     flex column and .admin-main is the ONLY scrolling region, with the
+     nav as a normal (non-fixed) flex item pinned at the bottom of that
+     column. This keeps the nav visible at ALL scroll positions,
+     independent of the browser chrome. */
+  .admin-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh; /* dynamic viewport height — accounts for address bar */
+    overflow: hidden;
+  }
+  .admin-main {
+    flex: 1 1 auto;
+    min-height: 0; /* required so a flex child can actually scroll */
+    overflow-y: auto;
+    overflow-x: hidden; /* safety net — table's own scroll wrapper (see
+      admintable.css) handles horizontal scroll; this stops any other
+      wide content from ever forcing the whole page to scroll sideways */
+    -webkit-overflow-scrolling: touch;
+  }
+}

@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS — the ONLY things that live in this file.
+   Every component has its own CSS file under its feature's /styles folder;
+   they all point back to these variables. Change the palette here — 3
+   shades per family, nothing else — and the whole site updates.
+   ========================================================================== */
+:root {
+
+  /* ---- 1. PRIMARY — maroon. Navbar, footer, headings, primary buttons ---- */
+  --primary-light: #5C2A3A;
+  --primary:       #3D1526;
+  --primary-dark:  #2A0F1A;
+
+  /* ---- 2. ACCENT — warm gold/terracotta. Labels, links, price, focus ---- */
+  --gold-light: #C9A067;
+  --gold:       #A9754A;
+  --gold-dark:  #8B5A34;
+
+  /* ---- 3. NEUTRAL — page & surface backgrounds ---- */
+  --bg:         #FBF3EC;   /* cream page background */
+  --bg-card:    #FFFFFF;   /* white cards / surfaces / inputs */
+  --bg-alt:     #F3E7DD;   /* soft divider / hover / border tone */
+
+  /* ---- 4. TEXT ---- */
+  --text:        #2B1B1F;   /* headings + body copy */
+  --text-muted:  #7A6560;   /* secondary / supporting copy, placeholders */
+  --text-light:  #FBF3EC;   /* text sitting on maroon/dark surfaces */
+
+  /* ---- 5. BUTTON — the one CTA color pair every button style keys off ---- */
+  --btn-bg:        var(--primary);
+  --btn-bg-hover:  var(--primary-dark);
+  --btn-text:      var(--text-light);
+
+  /* ---- 6. FONT ---- */
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+}
+
+/* ==========================================================================
+   BASE RESET — not variables, but the minimum needed for the tokens above
+   to actually apply everywhere (fonts/colors on the raw html tags).
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+button { font-family: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}

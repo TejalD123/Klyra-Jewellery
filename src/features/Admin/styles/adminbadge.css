@@ -1,0 +1,21 @@
+/* =========================================================================
+   ADMIN BADGE — used by StatusBadge.jsx and inline status/count badges
+   Depends on tokens from admin.css
+   ========================================================================= */
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  text-transform: capitalize;
+  border: none;
+}
+
+.admin-badge-success { background-color: var(--admin-success-bg, #E6F4EA); color: var(--admin-success, #3E7C4A); }
+.admin-badge-warning  { background-color: var(--admin-warning-bg, #FFF4E0); color: var(--admin-warning, #B8860B); }
+.admin-badge-danger   { background-color: #D9364A; color: #FFFFFF; }
+.admin-badge-info     { background-color: var(--admin-info-bg, #E8F0FE); color: var(--admin-info, #2C5FA8); }
+.admin-badge-neutral  { background-color: var(--admin-cream-dim, #F5E4D9); color: var(--admin-text-muted, #9C8577); }

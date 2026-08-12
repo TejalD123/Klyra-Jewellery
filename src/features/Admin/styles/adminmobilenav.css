@@ -1,0 +1,66 @@
+/* =========================================================================
+   ADMIN MOBILE NAV — bottom tab bar, shown only below 900px
+   Desktop uses AdminSidebar.css instead. Depends on tokens from admin.css
+   ========================================================================= */
+
+.admin-mobilenav {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .admin-mobilenav {
+    display: flex;
+    /* No longer position:fixed — .admin-shell is now a flex column
+       (see admin.css) and this is the last flex item, so it's always
+       pinned at the bottom of the real screen regardless of the mobile
+       browser's address bar expanding/collapsing. */
+    flex-shrink: 0;
+    width: 100%;
+    /* height must include the safe-area inset explicitly — otherwise on
+       notched/gesture-bar phones the padding pushes total rendered
+       height beyond what flex allocated, and the last bit of content
+       behind it gets covered. */
+    height: calc(var(--admin-mobilenav-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+    background: var(--admin-surface);
+    border-top: 1px solid var(--admin-border);
+    z-index: 50;
+  }
+}
+
+.admin-mobilenav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  text-decoration: none;
+  padding: 0 0.2rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.admin-mobilenav__item svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+.admin-mobilenav__item.is-active {
+  color: var(--rust-brown);
+}
+
+/* With 6 tabs, very narrow phones (<380px) get tight — shrink further
+   instead of letting labels wrap or overflow. */
+@media (max-width: 380px) {
+  .admin-mobilenav__item {
+    font-size: 0.5rem;
+  }
+  .admin-mobilenav__item svg {
+    width: 17px;
+    height: 17px;
+  }
+}

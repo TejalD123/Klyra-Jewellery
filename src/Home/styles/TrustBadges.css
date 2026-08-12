@@ -1,0 +1,109 @@
+.trust {
+  background-color: var(--bg-card);
+  padding: 0.5px 0;
+  width: 100%;
+  overflow: hidden; /* keeps the mobile marquee's duplicated track from
+                        creating horizontal page scroll */
+}
+
+/* ---- Desktop / tablet: bordered box, hidden on mobile ---- */
+.trust__grid {
+  display: none;
+  width: 100%;
+  padding: 1.25rem 1rem;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  border: 2px solid var(--gold);
+  border-radius: 0;
+}
+@media (min-width: 640px) {
+  .trust__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .trust__grid {
+    gap: 1.5rem;
+    padding: 1.75rem 2.5rem;
+    grid-template-columns: repeat(4, minmax(0, 320px));
+    justify-content: center;
+  }
+}
+
+.trust__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  gap: 0.75rem;
+}
+
+.trust__icon {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.trust__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.25;
+}
+.trust__subtitle {
+  font-size: 0.75rem;
+  color: var(--gold);
+  opacity: 0.75;
+  margin-top: 0.15rem;
+}
+
+/* =========================================================================
+   MOBILE — continuous "train" marquee: badges scroll left in an
+   unbroken loop, full width, no border/box (edge-to-edge).
+   ========================================================================= */
+.trust__marquee {
+ display: block;
+  width: 100%;
+  padding: 1.25rem 1rem;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  border: 2px solid var(--gold);
+  border-radius: 0;
+}
+@media (min-width: 640px) {
+  .trust__marquee { display: none; }
+}
+
+.trust__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: trust-marquee 16s linear infinite;
+}
+
+/* Pausing on touch/hover makes it easier to actually read one while
+   your thumb is on the screen, then it resumes moving. */
+.trust__marquee:active .trust__marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes trust-marquee {
+  from { transform: translateX(0); }
+  /* exactly half the track's width, since BADGES is duplicated once —
+     at -50% the second copy sits exactly where the first started,
+     so the loop point is invisible */
+  to { transform: translateX(-50%); }
+}
+
+.trust__marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.75rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.trust__marquee-item .trust__title,
+.trust__marquee-item .trust__subtitle {
+  white-space: nowrap;
+}

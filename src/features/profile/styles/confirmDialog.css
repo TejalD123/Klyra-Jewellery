@@ -1,0 +1,92 @@
+.cfd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 23, 31, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+}
+
+.cfd-panel {
+  background: #fff;
+  border-radius: 14px;
+  padding: 26px 26px 22px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.cfd-panel h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1f1f1f;
+}
+
+.cfd-panel p {
+  margin: 0 0 22px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6b6b6b;
+}
+
+.cfd-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cfd-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.cfd-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cfd-btn-ghost {
+  background: #fff;
+  border-color: #e0ddd6;
+  color: #3a3a3a;
+}
+
+.cfd-btn-ghost:hover:not(:disabled) {
+  background: #f6f4f0;
+}
+
+.cfd-btn-primary {
+  background: #14171f;
+  color: #f6f3ec;
+}
+
+.cfd-btn-primary:hover:not(:disabled) {
+  background: #2a2f3d;
+}
+
+.cfd-btn-danger {
+  background: #c0554a;
+  color: #fff;
+}
+
+.cfd-btn-danger:hover:not(:disabled) {
+  background: #a8443a;
+}
+
+@media (max-width: 420px) {
+  .cfd-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cfd-btn {
+    width: 100%;
+  }
+}

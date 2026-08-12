@@ -1,0 +1,167 @@
+/* =========================================================================
+   HOME CATEGORIES — dedicated stylesheet for the homepage "Curated
+   Categories" section only. Deliberately separate from
+   features/categories/styles/Categories.css (used by AllCategoriesPage,
+   CategorySubcategoriesPage, CategoryCard) so the two never fight over
+   the same class names again.
+   ========================================================================= */
+
+.home-categories {
+  background-color: #ffffff;
+}
+
+.home-categories__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+/* ---- heading + "View All" on the same line ---- */
+.home-categories__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding: 0 1.5rem;
+}
+
+.home-categories__heading {
+  font-family: var(--font-headline);
+  color: var(--primary);
+  font-size: 1.875rem;
+}
+
+.home-categories__viewall {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.home-categories__viewall:hover { text-decoration: underline; color: var(--primary); }
+
+/* ---- grid (desktop) ---- */
+.home-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 2.5rem;
+  padding: 0 1.5rem;
+}
+@media (max-width: 1279px) {
+  .home-categories__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---- circular item ---- */
+.home-categories__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.home-categories__ring {
+  width: 11rem;
+  height: 11rem;
+  border-radius: 999px;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.home-categories__item:hover .home-categories__ring { transform: scale(1.03); }
+
+.home-categories__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.home-categories__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-categories__photo-label {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.home-categories__name {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-top: 1.25rem;
+  white-space: nowrap;
+}
+.home-categories__item:hover .home-categories__name { color: var(--primary); }
+
+/* ---- loading / empty states ---- */
+.home-categories__skeleton {
+  width: 11rem;
+  height: 11rem;
+  border-radius: 999px;
+  background-color: var(--bg-alt);
+  animation: home-cat-pulse 1.5s ease-in-out infinite;
+}
+@keyframes home-cat-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.home-categories__empty {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 0 1.5rem;
+}
+
+/* ---- mobile: horizontal scroll, ~2 circles visible ---- */
+@media (max-width: 767px) {
+  .home-categories__top {
+    padding: 0 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+  .home-categories__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 0 1.25rem 0.5rem;
+    scrollbar-width: none;
+  }
+  .home-categories__grid::-webkit-scrollbar { display: none; }
+
+  .home-categories__item {
+    flex: 0 0 auto;
+    width: 42%;
+    scroll-snap-align: start;
+  }
+  .home-categories__ring {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .home-categories__skeleton {
+    flex: 0 0 auto;
+    width: 42%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}

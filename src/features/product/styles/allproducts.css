@@ -1,0 +1,63 @@
+/* =========================================================================
+   ALL JEWELLERY PAGE — reuses SearchPage.css (imported in the page file)
+   for searchbar, toolbar, product grid, pagination, mobile filter/sort
+   bar, and the sort bottom sheet — all untouched. This file only adds
+   what's unique to THIS page: the plain "All Jewellery" header (shown
+   when no main category is selected) and the main-category nav chips.
+   ========================================================================= */
+
+/* ---- Plain header shown instead of the image hero when no main
+   category is selected (i.e. "All Jewellery" state) ---- */
+.jewellery-hero-plain {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2.25rem 2rem 0.5rem;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) {
+  .jewellery-hero-plain { padding: 1.75rem 1.25rem 0.25rem; }
+}
+.jewellery-hero-plain__title {
+  font-family: var(--font-headline);
+  font-size: 1.875rem;
+  color: var(--text);
+  margin: 0;
+}
+.jewellery-hero-plain__desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* ---- Main category nav — horizontal scrollable chip row, always
+   visible (not hidden inside the mobile filter sheet), so switching
+   between Rings / Earrings / Necklaces etc. is always one tap away ---- */
+.jewellery-nav {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1.5rem;
+  scrollbar-width: none;
+}
+.jewellery-nav::-webkit-scrollbar { display: none; }
+
+.jewellery-nav__chip {
+  flex: 0 0 auto;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 999px;
+  border: 1.5px solid var(--bg-alt);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.jewellery-nav__chip:hover { border-color: var(--gold); color: var(--gold-dark); }
+.jewellery-nav__chip.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--text-light);
+}

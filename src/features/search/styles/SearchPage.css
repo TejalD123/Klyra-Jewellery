@@ -1,0 +1,677 @@
+/* ---- Compact category hero (shorter than category-hero on the
+   subcategories page — this one sits above a filterable grid, not as a
+   full-width landing banner) ---- */
+.search-page__hero {
+  position: relative;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden; /* NEW: keeps the two bg layers clipped to the hero */
+}
+@media (min-width: 768px) {
+  .search-page__hero { height: 9.5rem; }
+}
+
+/* NEW: two full-size layers stacked behind the overlay/title — same
+   pattern as .category-hero__bg on the subcategories page. Only one is
+   visible at a time; the media query below swaps them. */
+.search-page__hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.search-page__hero-bg--mobile { display: none; }
+
+@media (max-width: 767px) {
+  .search-page__hero-bg--desktop { display: none; }
+  .search-page__hero-bg--mobile { display: block; }
+}
+
+.search-page__hero-overlay {
+  position: relative; /* NEW: sits above the .search-page__hero-bg layers */
+  z-index: 1;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  background: linear-gradient(to right, rgba(20, 8, 14, 0.55), transparent 70%);
+}
+.search-page__hero-title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  color: var(--text-light);
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .search-page__hero-title { font-size: 2.125rem; }
+}
+.search-page__hero-desc {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  opacity: 0.85;
+  margin-top: 0.25rem;
+  max-width: 32rem;
+}
+
+/* ---- search page shell ---- */
+.search-page { background-color: var(--bg); }
+.search-page__inner {
+  max-width: 1320px;
+  margin: 2.3rem auto;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) {
+  .search-page__inner {
+    padding: 0 1.25rem;
+    margin: 1.5rem auto;
+    padding-bottom: 5.5rem; /* clears the fixed mobile Filter/Sort bar */
+  }
+}
+
+/* ---- search bar — prominent, right under the hero ---- */
+.search-page__searchbar {
+  max-width: 36rem;
+  margin: 0 auto 1.75rem;
+}
+.search-page__searchbar input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.9rem 1.4rem;
+  font-size: 0.9375rem;
+  color: var(--text);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--bg-alt);
+  border-radius: 999px;
+  outline: none;
+  box-shadow: 0 4px 16px rgba(61, 21, 38, 0.06);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-page__searchbar input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(201, 160, 99, 0.18);
+}
+
+.search-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--bg-alt);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.search-page__result-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.search-page__sort-desktop { display: none; }
+@media (min-width: 768px) {
+  .search-page__sort-desktop { display: block; margin-left: auto; }
+}
+
+/* =========================================================================
+   METAL TYPE — compact dropdown (was a row of tab buttons that wrapped
+   and pushed the toolbar layout around with enough options). Fixed width
+   footprint regardless of how many metal types the category has.
+   ========================================================================= */
+.metal-tabs {
+  display: none;
+}
+@media (min-width: 768px) {
+  .metal-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex: 1;
+    justify-content: center;
+  }
+}
+.metal-tabs__tab {
+  padding: 0.5rem 1.15rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid var(--bg-alt);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.metal-tabs__tab:hover { border-color: var(--gold); color: var(--gold-dark); }
+.metal-tabs__tab.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--text-light);
+}
+
+/* ---- Mobile-only metal type dropdown (tabs above take over at 768px+) ---- */
+.metal-select {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--bg-alt);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  max-width: 11rem;
+}
+.metal-select:focus { border-color: var(--gold); }
+@media (min-width: 768px) {
+  .metal-select { display: none; }
+}
+
+/* ---- Layout: sidebar + grid side by side on tablet/desktop,
+   stacked (grid only — sidebar becomes a sheet) on mobile ---- */
+.search-page__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .search-page__layout { flex-direction: row; align-items: flex-start; }
+}
+
+.search-page__grid-wrap {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+/* =========================================================================
+   FILTER SIDEBAR
+   - Laptop/tablet (768px+): static column, always visible, sticky.
+   - Mobile (<768px): fixed bottom sheet, opened via the bottom bar.
+   ========================================================================= */
+.filter-sidebar {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: var(--primary);
+  color: var(--text-light);
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 8px 28px rgba(49, 17, 32, 0.18);
+}
+@media (min-width: 768px) {
+  .filter-sidebar {
+    width: 16rem;
+    position: sticky;
+    top: 1rem;
+  }
+  .filter-sidebar__close,
+  .filter-sidebar__footer {
+    display: none;
+  }
+  .filter-backdrop {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .filter-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 8, 14, 0.45);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .filter-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filter-sidebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 82vh;
+    border-radius: 20px 20px 0 0;
+    z-index: 201;
+    box-shadow: 0 -12px 32px rgba(49, 17, 32, 0.25);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  .filter-sidebar.is-open {
+    transform: translateY(0);
+  }
+}
+
+.filter-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+}
+.filter-sidebar__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.filter-sidebar__title {
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  color: var(--text-light);
+}
+.filter-sidebar__clear {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.filter-sidebar__clear:hover { color: var(--text-light); }
+.filter-sidebar__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.filter-sidebar__close:hover { background: rgba(255, 255, 255, 0.18); }
+
+.filter-sidebar__scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+@media (max-width: 767px) {
+  .filter-sidebar__scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 0.25rem;
+  }
+}
+
+.filter-sidebar__footer {
+  flex-shrink: 0;
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.filter-sidebar__apply-btn {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  background: var(--gold);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.filter-sidebar__apply-btn:hover { background: var(--gold-light); }
+
+.filter-sidebar__section-title {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.filter-sidebar__price-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.filter-sidebar__price-row span { color: rgba(255, 255, 255, 0.5); }
+
+.filter-sidebar__checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+.filter-sidebar__checkbox-row input {
+  accent-color: var(--gold);
+  width: 1rem;
+  height: 1rem;
+}
+.filter-sidebar__checkbox-row span {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.filter-sidebar__checkbox-row:hover span { color: var(--text-light); }
+
+.filter-sidebar__category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 14rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+.filter-sidebar__category-list::-webkit-scrollbar { width: 4px; }
+.filter-sidebar__category-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+.filter-sidebar__rating-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.filter-sidebar__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+}
+.filter-sidebar__rating-row input { accent-color: var(--gold); }
+.filter-sidebar__rating-suffix { font-size: 0.75rem; color: rgba(255, 255, 255, 0.55); }
+.filter-sidebar__reset-rating {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-top: 0.25rem;
+  align-self: flex-start;
+}
+
+.filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  background-color: var(--bg-card);
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+.filter-input::placeholder { color: var(--text-muted); }
+.filter-input:focus { box-shadow: 0 0 0 2px var(--gold); }
+
+.filter-sidebar__size-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter-sidebar__size-chip {
+  min-width: 2.5rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-sidebar__size-chip:hover { border-color: var(--gold); }
+.filter-sidebar__size-chip.is-selected {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--primary);
+}
+
+.sort-dropdown {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--bg-alt);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+.sort-dropdown:focus { border-color: var(--gold); }
+
+/* =========================================================================
+   PRODUCT GRID
+   - Desktop/tablet (768px+): fixed grid, 3-per-row (.search-page__grid).
+   - Mobile (<768px): TWO independently-scrollable rows
+     (.search-page__grid-mobile > .search-page__grid-row × 2) — each row
+     has its own overflow-x:auto, so scrolling one row does NOT move the
+     other. The desktop grid is hidden on mobile and vice versa (see JSX
+     — both are rendered, CSS picks which is visible).
+   ========================================================================= */
+.search-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .search-page__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.search-page__grid-mobile { display: none; }
+
+@media (max-width: 767px) {
+  .search-page__grid { display: none; }
+  .search-page__grid--skeleton {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-page__grid-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .search-page__grid-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.85rem;
+    margin: 0 -1.25rem;
+    padding: 0 1.25rem 0.5rem;
+    scrollbar-width: none;
+  }
+  .search-page__grid-row::-webkit-scrollbar { display: none; }
+
+  /* ~44% width => a little over 2 cards visible per screen, each row
+     scrolls independently through its own half of the product set */
+  .search-page__grid-row > * {
+    flex: 0 0 44%;
+    scroll-snap-align: start;
+  }
+}
+
+.search-page__skeleton {
+  aspect-ratio: 4 / 5.6;
+  border-radius: 14px;
+  background-color: var(--bg-alt);
+  animation: search-page-pulse 1.5s ease-in-out infinite;
+}
+@keyframes search-page-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.search-page__error { color: #B03A48; }
+
+.search-page__empty {
+  text-align: center;
+  padding: 5rem 0;
+}
+.search-page__empty-title {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.search-page__empty-sub { font-size: 0.875rem; color: var(--text-muted); }
+
+.search-page__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+.search-page__page-btn {
+  padding: 0.55rem 1.35rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1.5px solid var(--bg-alt);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.search-page__page-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-dark); }
+.search-page__page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.search-page__page-label { font-size: 0.875rem; color: var(--text-muted); }
+
+/* =========================================================================
+   MOBILE-ONLY: fixed bottom bar with Filter + Sort buttons
+   ========================================================================= */
+.search-page__mobile-bar { display: none; }
+@media (max-width: 767px) {
+  .search-page__mobile-bar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 150;
+    background: var(--bg-card);
+    border-top: 1px solid var(--bg-alt);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.search-page__mobile-bar-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+.search-page__mobile-bar-divider {
+  width: 1px;
+  background: var(--bg-alt);
+  margin: 0.25rem 0;
+}
+.search-page__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--primary-dark);
+}
+
+/* =========================================================================
+   MOBILE-ONLY: sort bottom sheet
+   ========================================================================= */
+.sort-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 8, 14, 0.45);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.sort-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sort-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 201;
+  background: var(--bg-card);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -12px 32px rgba(49, 17, 32, 0.25);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.sort-sheet.is-open {
+  transform: translateY(0);
+}
+@media (min-width: 768px) {
+  .sort-sheet, .sort-backdrop { display: none; }
+}
+
+.sort-sheet__header {
+  padding: 1.1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--bg-alt);
+}
+.sort-sheet__header h2 {
+  font-family: var(--font-headline);
+  font-size: 1.0625rem;
+  color: var(--text);
+}
+.sort-sheet__options {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.5rem 1rem;
+}
+.sort-sheet__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+.sort-sheet__option:active { background: var(--bg-alt); }
+.sort-sheet__option.is-selected {
+  color: var(--gold-dark);
+  font-weight: 700;
+}

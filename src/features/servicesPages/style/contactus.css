@@ -1,0 +1,317 @@
+.klyra-contact {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.klyra-eyebrow {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin: 0 0 14px;
+}
+
+.klyra-eyebrow.gold {
+  color: var(--gold-light);
+}
+
+/* ===== Hero ===== */
+.klyra-contact-hero {
+  position: relative;
+  text-align: center;
+  padding: 96px 24px 64px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* subtle warm glow behind the hero — depth without an image */
+.klyra-contact-hero::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(169, 117, 74, 0.14) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.klyra-contact-hero h1 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1.15;
+  margin: 0 0 18px;
+  color: var(--primary);
+}
+
+.klyra-contact-hero-sub {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 32px;
+}
+
+/* ===== Facet divider ===== */
+.klyra-facet-divider {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 10px;
+  margin: 0 auto;
+}
+
+.klyra-facet-divider-small {
+  max-width: 100%;
+  margin: 20px 0 0;
+  opacity: 0.55;
+}
+
+/* ===== Grid ===== */
+.klyra-contact-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ===== Form card ===== */
+.klyra-contact-form-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-alt);
+  border-radius: 4px;
+  padding: 40px;
+  box-shadow: 0 20px 50px -32px rgba(42, 15, 26, 0.35);
+  transition: box-shadow 0.25s ease;
+}
+
+.klyra-contact-form-card:hover {
+  box-shadow: 0 24px 60px -28px rgba(42, 15, 26, 0.4);
+}
+
+/* thin gold corner accent — top-left, echoing a set stone's facet */
+.klyra-contact-form-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 36px;
+  height: 36px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  border-top-left-radius: 4px;
+}
+
+.klyra-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.klyra-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.klyra-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.klyra-field span {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.klyra-field input,
+.klyra-field select,
+.klyra-field textarea {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 11px 12px;
+  border: 1px solid var(--bg-alt);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.klyra-field input:focus-visible,
+.klyra-field select:focus-visible,
+.klyra-field textarea:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(169, 117, 74, 0.22);
+}
+
+.klyra-field input[aria-invalid="true"],
+.klyra-field textarea[aria-invalid="true"] {
+  border-color: #a3372c;
+}
+
+.klyra-field em {
+  font-style: normal;
+  font-size: 12px;
+  color: #a3372c;
+}
+
+.klyra-form-error {
+  font-size: 13px;
+  color: #a3372c;
+  background: rgba(163, 55, 44, 0.08);
+  border: 1px solid rgba(163, 55, 44, 0.25);
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin: -6px 0 0;
+}
+
+.klyra-solid-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 13px 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.klyra-solid-btn:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+  transform: translateY(-1px);
+}
+
+.klyra-solid-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.klyra-solid-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Success state ===== */
+.klyra-contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.klyra-contact-success h2 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 28px;
+  margin: 0 0 10px;
+  color: var(--primary);
+}
+
+.klyra-contact-success p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+.klyra-ghost-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-dark);
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 11px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.klyra-ghost-btn:hover {
+  background: var(--gold);
+  color: var(--text-light);
+}
+
+/* ===== Info panel ===== */
+.klyra-contact-info {
+  position: relative;
+  background: var(--primary);
+  color: var(--text-light);
+  border-radius: 4px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* faint gold vignette in the corner — quiet richness, no image needed */
+.klyra-contact-info::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(201, 160, 103, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.klyra-info-line {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(251, 243, 236, 0.78);
+  margin: 0;
+}
+
+.klyra-info-line a {
+  color: var(--text-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(251, 243, 236, 0.35);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.klyra-info-line a:hover {
+  border-bottom-color: var(--gold-light);
+  color: var(--gold-light);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 800px) {
+  .klyra-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .klyra-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .klyra-contact-form-card {
+    padding: 28px 22px;
+  }
+
+  .klyra-contact-hero {
+    padding: 64px 20px 48px;
+  }
+}

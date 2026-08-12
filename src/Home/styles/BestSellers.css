@@ -1,0 +1,221 @@
+.bestsellers {
+  background-color: var(--primary);
+}
+.bestsellers__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+.bestsellers__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.bestsellers__eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--gold-light);
+  display: block;
+}
+.bestsellers__heading {
+  font-family: var(--font-headline);
+  color: var(--text-light);
+  font-size: 1.75rem;
+  margin-top: 0.6rem;
+}
+.bestsellers__viewall {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+.bestsellers__viewall:hover { text-decoration: underline; }
+
+/* ---- grid: 2-up small, 4-up from tablet+ (same "4 per row" target as
+   ProductCard's grid), mobile one-at-a-time scroll ---- */
+.bestsellers__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .bestsellers__grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+}
+
+@media (max-width: 639px) {
+  .bestsellers__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem 0.5rem;
+    scrollbar-width: none;
+  }
+  .bestsellers__grid::-webkit-scrollbar { display: none; }
+
+  /* same 82% width as ProductCard's mobile carousel (SearchPage grid)
+     so both sections feel consistent when scrolled on a phone */
+  .bestsellers__card {
+    flex: 0 0 auto;
+    width: 82%;
+    scroll-snap-align: start;
+  }
+}
+
+/* ---- card — same border weight/color and corner radius as ProductCard,
+   just split into an image top + white info bottom (unlike ProductCard's
+   single continuous card) so the outline reads as one shape ---- */
+.bestsellers__card {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.bestsellers__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* square media — matches ProductCard's aspect-ratio: 1/1 exactly, so
+   both sections' cards are the same height for the same width */
+.bestsellers__card-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px 12px 0 0;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--gold-dark);
+  border-bottom: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bestsellers__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.bestsellers__card:hover .bestsellers__card-image img { transform: scale(1.045); }
+.bestsellers__card-label {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ---- discount tag ---- */
+.bestsellers__discount-tag {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-family: var(--font-label);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background-color: var(--gold);
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+}
+
+/* ---- wishlist button — same size/position as ProductCard's ---- */
+.bestsellers__wishlist {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.bestsellers__wishlist:hover { background: #fff; transform: scale(1.08); }
+
+/* ---- info box: white card beneath the image — padding/type sizes
+   matched to ProductCard's body so text blocks line up the same ---- */
+.bestsellers__card-info {
+  background-color: #fff;
+  border: 1.5px solid var(--gold-dark);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 0.75rem 0.8rem 0.85rem;
+}
+
+.bestsellers__card-name {
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  color: var(--text, #2b1f1a);
+  /* fixed 2-line box regardless of name length, so every card's white
+     info box ends up the same height whether the name wraps or not */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(0.875rem * 1.3 * 2);
+}
+
+.bestsellers__card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid var(--bg-alt);
+}
+
+.bestsellers__card-price {
+  font-family: var(--font-label);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-dark, var(--gold));
+}
+
+.bestsellers__card-mrp {
+  font-size: 0.6875rem;
+  color: var(--text-muted, #8a7267);
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+/* ---- loading skeleton ---- */
+.bestsellers__card--loading .bestsellers__card-image {
+  background-color: var(--bg-card);
+  border-color: var(--bg-alt);
+  animation: bestsellers-pulse 1.4s ease-in-out infinite;
+}
+.bestsellers__card--loading .bestsellers__card-info {
+  border-color: var(--bg-alt);
+  animation: bestsellers-pulse 1.4s ease-in-out infinite;
+}
+@keyframes bestsellers-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+/* ---- Responsive: match ProductCard's mobile type-size drop ---- */
+@media (max-width: 480px) {
+  .bestsellers__card-info { padding: 0.65rem 0.7rem 0.75rem; }
+  .bestsellers__card-name { font-size: 0.8125rem; min-height: calc(0.8125rem * 1.3 * 2); }
+  .bestsellers__card-price { font-size: 0.85rem; }
+}

@@ -1,0 +1,175 @@
+.qdm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 31, 26, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.qdm-panel {
+  --qdm-primary: var(--admin-primary, #4a1d1d);
+  --qdm-primary-hover: var(--admin-primary-hover, #5c2626);
+  --qdm-border: var(--admin-border, #ece0d8);
+  --qdm-text: var(--admin-text, #2b1f1a);
+  --qdm-text-muted: var(--admin-text-muted, #8a7267);
+  --qdm-bg: var(--admin-bg, #fdece4);
+
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(43, 31, 26, 0.25);
+}
+
+.qdm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--qdm-border);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+.qdm-header h2 { margin: 0; font-size: 18px; font-weight: 700; color: var(--qdm-text); }
+.qdm-header-sub { margin: 4px 0 0; font-size: 12px; color: var(--qdm-text-muted); }
+
+.qdm-close {
+  border: none;
+  background: var(--qdm-bg);
+  color: var(--qdm-text);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.qdm-close:hover { background: var(--qdm-border); }
+
+.qdm-body {
+  padding: 22px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.qdm-section h3 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--qdm-text-muted);
+}
+
+.qdm-contact-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.qdm-contact-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--qdm-text);
+  background: var(--qdm-bg);
+  border: 1px solid var(--qdm-border);
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.qdm-contact-chip:hover { border-color: var(--qdm-primary); }
+
+.qdm-message {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--qdm-text);
+  background: var(--qdm-bg);
+  border-radius: 10px;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+}
+
+.qdm-status-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.qdm-status-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--qdm-border);
+  background: #fff;
+  color: var(--qdm-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.qdm-status-btn:hover:not(:disabled) { border-color: var(--qdm-primary); }
+.qdm-status-btn--active.qdm-status-btn--new { background: rgba(47, 95, 219, 0.1); color: #2f5fdb; border-color: #2f5fdb; }
+.qdm-status-btn--active.qdm-status-btn--in_progress { background: #fef3e2; color: #b06a1f; border-color: #b06a1f; }
+.qdm-status-btn--active.qdm-status-btn--resolved { background: #e6f4ea; color: #1e7d3a; border-color: #1e7d3a; }
+.qdm-status-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.qdm-response-textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--qdm-text);
+  border: 1px solid var(--qdm-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+.qdm-response-textarea:focus-visible {
+  outline: none;
+  border-color: var(--qdm-primary);
+  box-shadow: 0 0 0 3px rgba(74, 29, 29, 0.08);
+}
+
+.qdm-text-muted { font-size: 11px; color: var(--qdm-text-muted); margin: 6px 0 0; }
+
+.qdm-error {
+  font-size: 12px;
+  color: #b3261e;
+  background: #fdecea;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.qdm-send-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--qdm-primary);
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.qdm-send-btn:hover:not(:disabled) { background: var(--qdm-primary-hover); }
+.qdm-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.qdm-send-note {
+  font-size: 11px;
+  color: var(--qdm-text-muted);
+  margin: 8px 0 0;
+}
+
+@media (max-width: 560px) {
+  .qdm-overlay { padding: 0; }
+  .qdm-panel { max-width: 100%; max-height: 100vh; border-radius: 0; }
+}

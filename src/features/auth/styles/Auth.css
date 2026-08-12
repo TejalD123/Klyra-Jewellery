@@ -1,0 +1,215 @@
+.auth-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.auth-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ---- method toggle (Email / Phone tabs) ---- */
+.auth-method-toggle {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.auth-method-toggle__btn {
+  padding: 0 0 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.auth-method-toggle__btn--active {
+  color: var(--gold-dark);
+  border-bottom-color: var(--gold-dark);
+}
+
+/* ---- fields ---- */
+.auth-field { margin-bottom: 1.5rem; }
+.auth-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-dark);
+}
+.auth-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text);
+  border: none;
+  border-bottom: 1px solid var(--bg-alt);
+  background-color: transparent;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.auth-input::placeholder { color: var(--text-muted); opacity: 0.6; }
+.auth-input:focus { border-bottom-color: var(--primary); }
+
+.auth-error {
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  color: #B03A48;
+}
+
+.auth-submit-btn {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.95rem 0;
+  margin-top: 0.5rem;
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+.auth-submit-btn:hover:not(:disabled) { background-color: var(--btn-bg-hover); }
+.auth-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.75rem 0;
+}
+.auth-divider__line { flex: 1; height: 1px; background-color: var(--bg-alt); }
+.auth-divider__text {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.auth-google-btn {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--bg-alt);
+  border-radius: 4px;
+  background-color: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+.auth-google-btn:hover:not(:disabled) { background-color: var(--bg); }
+.auth-google-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.auth-footer-note {
+  text-align: center;
+  margin-top: 1.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+.auth-footer-note--tight { margin-top: 0.5rem; }
+.auth-footer-note a {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+.auth-footer-note a:hover { text-decoration: underline; }
+.auth-footer-note u { text-decoration: underline; cursor: pointer; }
+
+/* ---- OTP screen ---- */
+.otp-wrap { text-align: center; }
+@media (min-width: 768px) {
+  .otp-wrap { text-align: left; }
+}
+.otp-highlight { color: var(--text); font-weight: 600; }
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem;
+}
+@media (min-width: 768px) {
+  .otp-inputs { justify-content: flex-start; }
+}
+.otp-input {
+  width: 2.75rem;
+  aspect-ratio: 1 / 1;
+  text-align: center;
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  color: var(--text);
+  border: 1px solid var(--bg-alt);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.otp-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(61, 21, 38, 0.12);
+}
+.otp-input:disabled { opacity: 0.5; }
+
+.otp-resend {
+  margin-top: 2rem;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.otp-resend:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---- phone input (react-phone-number-input) ---- */
+.phone-input-wrapper .PhoneInput {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0;
+  border: none;
+  border-bottom: 1px solid var(--bg-alt);
+  background-color: transparent;
+  transition: border-color 0.15s ease;
+}
+.phone-input-wrapper .PhoneInput:focus-within { border-bottom-color: var(--primary); }
+.phone-input-wrapper .PhoneInputInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text);
+  flex: 1;
+  margin-left: 0.5rem;
+}
+.phone-input-wrapper .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+}

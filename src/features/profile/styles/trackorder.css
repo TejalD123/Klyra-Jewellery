@@ -1,0 +1,393 @@
+.track-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+.track-page__title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.track-page__section { margin-bottom: 2rem; }
+.track-page__section-title {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.track-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-alt);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.track-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.track-card__order-no {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  color: var(--text);
+}
+.track-card__agency {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.track-card__cancelled-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #B3261E;
+  background: rgba(179, 38, 30, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+.track-card__cancel-reason {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.track-steps {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+.track-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 5.5rem;
+  text-align: center;
+}
+.track-step__line {
+  position: absolute;
+  top: 1rem;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--bg-alt);
+  z-index: 0;
+}
+.track-step:first-child .track-step__line { display: none; }
+.track-step.is-done .track-step__line { background: var(--gold); }
+
+.track-step__icon {
+  position: relative;
+  z-index: 1;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.track-step.is-done .track-step__icon {
+  background: var(--gold);
+  color: var(--primary-dark);
+}
+.track-step.is-current .track-step__icon {
+  box-shadow: 0 0 0 3px rgba(169, 117, 74, 0.25);
+}
+
+.track-step__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.track-step__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.track-step.is-current .track-step__label { color: var(--gold-dark); }
+.track-step__time {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+}
+
+.track-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.track-page__title { margin-bottom: 0; }
+
+.track-page__tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  padding: 4px;
+  border-radius: 10px;
+}
+.track-page__tabs button {
+  border: none;
+  background: transparent;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+.track-page__tabs button.active {
+  background: var(--bg-card);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.track-page__empty {
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* ===== Card header: product + payment + date (click to expand) ===== */
+.track-card__header-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  background: none;
+  padding: 0 0 1.25rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.track-card__product-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--bg-alt);
+  border: 1px solid var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.track-card__product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.track-card__product-info { flex: 1; min-width: 0; }
+
+.track-card__product-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  width: fit-content;
+}
+.track-card__product-name:hover { text-decoration: underline; }
+
+.track-card__extra {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.track-card__product-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.track-card__payment {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--bg-alt);
+}
+.track-card__payment--cod { color: #b06a1f; }
+.track-card__payment--upi { color: #2f8a4e; }
+.track-card__payment--card { color: #3556c9; }
+
+.track-card__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.track-card__total {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.track-card__chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.track-card--expanded .track-card__chevron {
+  transform: rotate(180deg);
+}
+
+.track-card--expanded .track-card__header-btn {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--bg-alt);
+  margin-bottom: 1.25rem;
+}
+
+/* ===== Horizontal (collapsed) steps — same as before ===== */
+.track-steps--horizontal {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+.track-steps--horizontal .track-step__time,
+.track-steps--horizontal .track-step__live {
+  display: none;
+}
+
+/* ===== Vertical (expanded) live timeline ===== */
+.track-steps--vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.track-steps--vertical .track-step {
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  min-width: 0;
+  gap: 12px;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+.track-steps--vertical .track-step:last-child { padding-bottom: 0; }
+
+.track-steps--vertical .track-step__line {
+  top: 2rem;
+  left: 1rem;
+  width: 2px;
+  height: calc(100% - 1rem);
+  transform: translateX(-1px);
+}
+.track-steps--vertical .track-step:first-child .track-step__line { display: none; }
+
+.track-steps--vertical .track-step__body {
+  padding-top: 0.3rem;
+}
+.track-steps--vertical .track-step__label {
+  font-size: 0.8rem;
+}
+.track-steps--vertical .track-step__time {
+  font-size: 0.7rem;
+}
+
+.track-step__live {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  background: rgba(169, 117, 74, 0.12);
+  padding: 1px 7px;
+  border-radius: 999px;
+  width: fit-content;
+  margin-top: 2px;
+  animation: track-live-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes track-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+ 
+.track-card__review-list {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #ECE0D1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.track-card__review-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+ 
+.track-card__review-item-name {
+  font-size: 14.5px;
+  color: #2B2320;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+ 
+.track-card__review-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid #A9825A;
+  background: #FFFFFF;
+  color: #7A5B37;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+ 
+.track-card__review-btn svg {
+  stroke: #A9825A;
+  transition: stroke 0.15s ease, fill 0.15s ease;
+}
+ 
+.track-card__review-btn:hover {
+  background: #7A5B37;
+  color: #FFFFFF;
+}
+ 
+.track-card__review-btn:hover svg {
+  stroke: #FFFFFF;
+  fill: #FFFFFF;
+}
+ 
+.track-card__review-btn:active {
+  transform: scale(0.97);
+}
+ 
+@media (max-width: 480px) {
+  .track-card__review-item-name {
+    font-size: 13.5px;
+  }
+  .track-card__review-btn {
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+}
+ 

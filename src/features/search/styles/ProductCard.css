@@ -1,0 +1,174 @@
+/* =========================================================================
+   PRODUCT CARD — square media, compact body, tighter overall footprint.
+   Same class names as before (no JSX changes needed) — only sizing,
+   proportions, and a few polish details changed.
+   ========================================================================= */
+
+.product-card {
+  display: block;
+  width: 100%;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid var(--gold-dark);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.product-card:hover {
+  box-shadow: 0 10px 24px rgba(61, 21, 38, 0.12);
+  transform: translateY(-2px);
+  border-color: var(--gold);
+}
+
+/* ---- Square media (was 4:5) ---- */
+.product-card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+.product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.product-card:hover .product-card__media img { transform: scale(1.045); }
+.product-card__no-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+/* ---- Badges: smaller, tighter ---- */
+.product-card__badges {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  z-index: 2;
+}
+.product-card__badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-label);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background-color: var(--primary);
+  color: var(--text-light);
+  box-shadow: 0 2px 6px rgba(49, 17, 32, 0.22);
+}
+
+.product-card__out-of-stock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: rgba(43, 27, 31, 0.6);
+  color: var(--text-light);
+}
+
+/* ---- Body: reduced padding, smaller type, single-line name ---- */
+.product-card__body { padding: 0.75rem 0.8rem 0.85rem; }
+.product-card__name {
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-card__metal {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold-dark);
+  margin-bottom: 0.3rem;
+}
+.product-card__rating { margin-bottom: 0.3rem; }
+.product-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid var(--bg-alt);
+}
+.product-card__price {
+  font-family: var(--font-label);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+.product-card__strike {
+  font-size: 0.6875rem;
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* ---- star rating: scaled down to match compact card ---- */
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.star-rating__stars {
+  display: inline-flex;
+  color: var(--gold);
+  font-size: 0.75rem;
+}
+.star-rating__value { font-size: 0.6875rem; color: var(--text-muted); }
+
+/* ---- Responsive: slightly smaller still on narrow screens ---- */
+@media (max-width: 480px) {
+  .product-card { max-width: 100%; }
+  .product-card__body { padding: 0.65rem 0.7rem 0.75rem; }
+  .product-card__name { font-size: 0.8125rem; }
+  .product-card__price { font-size: 0.85rem; }
+}
+
+/* ---- Wishlist heart button — top-right of the media, above badges ---- */
+.product-card__wishlist {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 3;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease, color 0.15s ease;
+}
+.product-card__wishlist:hover {
+  background: #fff;
+  transform: scale(1.08);
+}
+.product-card__wishlist.is-active {
+  color: #B03A48;
+}

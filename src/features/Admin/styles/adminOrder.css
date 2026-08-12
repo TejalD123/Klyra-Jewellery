@@ -1,0 +1,457 @@
+/* Orders page — self-contained styling. Uses var(--admin-x, fallback) so it
+   picks up your existing --admin-* tokens automatically if they're defined
+   elsewhere, and otherwise falls back to this maroon/cream palette. */
+
+.ord-page {
+  --ord-primary: var(--admin-primary, #4a1d1d);
+  --ord-primary-hover: var(--admin-primary-hover, #5c2626);
+  --ord-bg: var(--admin-bg, #fdece4);
+  --ord-card: var(--admin-card-bg, #ffffff);
+  --ord-border: var(--admin-border, #ece0d8);
+  --ord-text: var(--admin-text, #2b1f1a);
+  --ord-text-muted: var(--admin-text-muted, #8a7267);
+  --ord-new: #2f5fdb;
+  --ord-new-bg: rgba(47, 95, 219, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== Filters ===== */
+.ord-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ord-select-filter,
+.ord-search {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 9px 14px;
+  border: 1px solid var(--ord-border);
+  border-radius: 8px;
+  background: var(--ord-card);
+  color: var(--ord-text);
+}
+
+.ord-search {
+  min-width: 240px;
+}
+
+.ord-search::placeholder {
+  color: var(--ord-text-muted);
+}
+
+.ord-select-filter:focus-visible,
+.ord-search:focus-visible {
+  outline: none;
+  border-color: var(--ord-primary);
+  box-shadow: 0 0 0 3px rgba(74, 29, 29, 0.1);
+}
+
+/* ===== Card / table shell ===== */
+.ord-card {
+  background: var(--ord-card);
+  border: 1px solid var(--ord-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.ord-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ord-table thead th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ord-text-muted);
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ord-border);
+  background: var(--ord-card);
+}
+
+.ord-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ord-border);
+  vertical-align: middle;
+  font-size: 13px;
+  color: var(--ord-text);
+}
+
+.ord-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Rows ===== */
+.ord-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ord-row:hover {
+  background: rgba(74, 29, 29, 0.035);
+}
+
+.ord-row--new {
+  background: var(--ord-new-bg);
+}
+
+.ord-row--new:hover {
+  background: rgba(47, 95, 219, 0.1);
+}
+
+.ord-chevron {
+  color: var(--ord-text-muted);
+  text-align: right;
+}
+
+/* ===== Order # cell ===== */
+.ord-order-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ord-order-number {
+  font-weight: 600;
+}
+
+.ord-new-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ord-new);
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+/* ===== Customer cell ===== */
+.ord-customer-name {
+  font-weight: 500;
+}
+
+.ord-customer-sub {
+  font-size: 12px;
+  color: var(--ord-text-muted);
+  margin-top: 2px;
+}
+
+/* ===== Product cell ===== */
+.ord-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ord-product-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--ord-bg);
+  border: 1px solid var(--ord-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  color: var(--ord-text-muted);
+}
+
+.ord-product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ord-product-name {
+  font-weight: 500;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ord-product-extra {
+  font-size: 11px;
+  color: var(--ord-text-muted);
+  margin-top: 2px;
+}
+
+/* ===== Payment cell ===== */
+.ord-payment-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ord-payment-method {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--ord-bg);
+  color: var(--ord-text-muted);
+  border: 1px solid var(--ord-border);
+}
+
+.ord-payment-method--cod {
+  color: #b06a1f;
+  border-color: #f0d9b5;
+  background: #fbf1e2;
+}
+
+.ord-payment-method--upi {
+  color: #2f8a4e;
+  border-color: #c9e8d3;
+  background: #eaf7ee;
+}
+
+.ord-payment-method--card {
+  color: #3556c9;
+  border-color: #d3ddf7;
+  background: #eef1fc;
+}
+
+/* ===== Amount / date ===== */
+.ord-amount {
+  font-weight: 600;
+}
+
+.ord-date {
+  color: var(--ord-text-muted);
+}
+
+/* ===== Status cell + action button ===== */
+.ord-status-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ord-action-btn {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ord-primary);
+  border: none;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ord-action-btn:hover:not(:disabled) {
+  background: var(--ord-primary-hover);
+}
+
+.ord-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Empty / error states ===== */
+.ord-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--ord-text-muted);
+}
+
+.ord-error {
+  color: #b3261e;
+}
+
+/* ===== Pagination ===== */
+.ord-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--ord-text-muted);
+  border-top: 1px solid var(--ord-border);
+}
+
+.ord-pagination-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.ord-page-btn {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--ord-border);
+  background: var(--ord-card);
+  color: var(--ord-text);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ord-page-btn:hover:not(:disabled) {
+  border-color: var(--ord-primary);
+}
+
+.ord-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .ord-table thead {
+    display: none;
+  }
+
+  .ord-table, .ord-table tbody, .ord-table tr, .ord-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .ord-row {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ord-border);
+  }
+
+  .ord-table td {
+    border-bottom: none;
+    padding: 4px 0;
+  }
+
+  .ord-chevron {
+    display: none;
+  }
+}
+
+/* ===== Status tabs ====
+   Single scrollable row instead of wrapping into multiple lines — with
+   9 tabs (Placed, Confirmed, ... All) flex-wrap:wrap pushed tabs onto
+   2-3 lines, especially on mobile. Now they stay on one row and scroll
+   horizontally instead. */
+.ord-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--ord-border, #ece0d8);
+  padding-bottom: 12px;
+}
+.ord-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ord-tab {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ord-text-muted, #8a7267);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ord-tab:hover {
+  background: rgba(74, 29, 29, 0.05);
+  color: var(--ord-text, #2b1f1a);
+}
+
+.ord-tab--active {
+  background: var(--ord-primary, #4a1d1d);
+  color: #fff;
+}
+
+.ord-tab-count {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+}
+
+.ord-tab--active .ord-tab-count {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ===== Delivery agency chip-picker (replaces plain <select>) ===== */
+.ord-delivery-assign {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--ord-bg, #fdece4);
+  border: 1px solid var(--ord-border, #ece0d8);
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-width: 220px;
+}
+
+.ord-delivery-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ord-text-muted, #8a7267);
+}
+
+.ord-agency-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ord-agency-chip {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ord-border, #ece0d8);
+  background: #fff;
+  color: var(--ord-text, #2b1f1a);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ord-agency-chip:hover {
+  border-color: var(--ord-primary, #4a1d1d);
+}
+
+.ord-agency-chip--active {
+  background: var(--ord-primary, #4a1d1d);
+  border-color: var(--ord-primary, #4a1d1d);
+  color: #fff;
+}
+
+.ord-agency-empty {
+  font-size: 11px;
+  color: var(--ord-text-muted, #8a7267);
+}
+
+.ord-ship-btn {
+  align-self: flex-start;
+}

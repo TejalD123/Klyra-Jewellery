@@ -1,0 +1,56 @@
+/* =========================================================================
+   ADMIN TOPBAR — used by Topbar.jsx
+   Depends on tokens from admin.css
+   ========================================================================= */
+
+.admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: var(--admin-topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  background: var(--admin-cream);
+  border-bottom: 1px solid var(--admin-border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .admin-topbar { padding: 0.75rem 1rem; }
+}
+
+.admin-topbar__title {
+  font-family: var(--admin-font-display);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--admin-text);
+  font-weight: 600;
+}
+
+.admin-topbar__subtitle {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: var(--admin-text-muted);
+}
+
+.admin-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ---- Back-link row used on full-page forms (Product/Category create) ---- */
+.admin-topbar__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+.admin-topbar__back:hover { color: var(--rust-brown); }

@@ -1,0 +1,414 @@
+/* =========================================================================
+   ADMIN FORM — used by Categories.jsx & Products.jsx create/edit forms
+   Underline style, matching storefront's auth inputs
+   Depends on tokens from admin.css
+   ========================================================================= */
+
+.admin-form-panel {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  padding: 1.75rem 2rem 2rem;
+}
+
+.admin-form-title {
+  font-family: var(--admin-font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-form-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--admin-radius-sm);
+  margin-bottom: 1.5rem;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+.admin-form-grid--full {
+  grid-column: 1 / -1;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+}
+.admin-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.4rem;
+}
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  background: transparent;
+  border:1.5px solid var(--admin-border);
+  padding: 0.55rem 0.1rem;
+  font-size: 0.9rem;
+  color: var(--admin-text);
+  font-family: var(--admin-font-body);
+  transition: border-color 0.2s ease;
+}
+.admin-field input::placeholder,
+.admin-field textarea::placeholder {
+  color: #b9b0a2;
+}
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--admin-gold);
+}
+.admin-field select {
+  cursor: pointer;
+  padding-top: 0.6rem;
+}
+
+.admin-field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-top: 1.4rem;
+}
+.admin-field-checkbox input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--admin-gold);
+  cursor: pointer;
+}
+.admin-field-checkbox label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--admin-text);
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.admin-field input[type="file"] {
+  border-bottom: none;
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--admin-text-muted);
+}
+.admin-field input[type="file"]::file-selector-button {
+  font-family: var(--admin-font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.45rem 0.9rem;
+  margin-right: 0.75rem;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border);
+  background: var(--admin-cream-dim);
+  color: var(--admin-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.admin-field input[type="file"]::file-selector-button:hover {
+  border-color: var(--admin-gold);
+  color: var(--admin-gold);
+}
+
+.admin-field .admin-field-error {
+  border-bottom-color: var(--admin-danger) !important;
+}
+
+.admin-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+/* Safety layout fix for the main Hero Image dropzone (same class used
+   without --compact) — ensures title/hint always stack cleanly instead
+   of running into each other on any screen size. */
+.admin-dropzone {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+.admin-dropzone .admin-dropzone__title {
+  display: block;
+  text-transform: none;
+}
+.admin-dropzone .admin-dropzone__hint {
+  display: block;
+  text-transform: none;
+  color: var(--admin-text-muted);
+}
+
+/* =========================================================================
+   Category Attributes — each row (name + value + delete cross).
+   Same underline-input pattern as .admin-field inputs, just laid out
+   as a row with a small circular remove button on the end.
+   ========================================================================= */
+
+.admin-attr-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+.admin-attr-row__input {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid var(--admin-border);
+  padding: 0.55rem 0.1rem;
+  font-size: 0.9rem;
+  color: var(--admin-text);
+  font-family: var(--admin-font-body);
+  transition: border-color 0.2s ease;
+}
+.admin-attr-row__input::placeholder {
+  color: #b9b0a2;
+}
+.admin-attr-row__input:focus {
+  outline: none;
+  border-bottom-color: var(--admin-gold);
+}
+.admin-attr-row__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--admin-border);
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.admin-attr-row__remove:hover {
+  border-color: var(--admin-danger);
+  color: var(--admin-danger);
+  background: var(--admin-danger-bg);
+}
+
+/* =========================================================================
+   Category Poster feature — kept compact, NOT the same tall size as
+   Hero Image. Two dropzones sit side-by-side in their own soft cards
+   for clearer visual separation.
+   ========================================================================= */
+
+/* ---- Preview image card (existing OR newly-selected) ---- */
+.admin-poster-preview {
+  margin-bottom: 0.6rem;
+  border-radius: var(--admin-radius-sm);
+  overflow: hidden;
+  background: var(--admin-surface, #fff);
+  border: 1px solid var(--admin-border);
+}
+.admin-poster-preview img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+.admin-poster-preview--compact img {
+  height: 70px;
+}
+.admin-poster-preview__label {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--admin-text-muted);
+  padding: 0.4rem 0.55rem;
+}
+
+/* ---- "New file just selected" confirmation state ---- */
+.admin-poster-preview--new {
+  border-color: var(--admin-gold);
+  border-width: 1.5px;
+}
+.admin-poster-preview__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.55rem;
+}
+.admin-poster-preview__label--new {
+  color: #3a7d44;
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-poster-preview__clear {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--admin-danger);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+.admin-poster-preview__clear:hover {
+  opacity: 0.75;
+}
+
+/* side-by-side, compact — default state for the poster section */
+.admin-poster-stack--row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+/* soft card wrapper for the single Category Poster field — image on top,
+   short hint, then the dropzone, all inside one tidy bordered card */
+.admin-poster-field {
+  background: var(--admin-cream-dim);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+.admin-poster-field label {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.admin-poster-field--single {
+  max-width: 420px;
+}
+.admin-poster-field__hint {
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: var(--admin-text-muted);
+  margin: 0 0 0.75rem;
+}
+
+/* smaller dropzone specifically for the two poster fields, so this
+   section doesn't visually compete with the big Hero Image dropzone.
+   Kept compact and centered so title/hint never run together. */
+.admin-dropzone--compact {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.25rem;
+  min-height: 78px;
+  padding: 0.7rem 0.6rem;
+  border-radius: var(--admin-radius-sm);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.admin-dropzone--compact:hover {
+  border-color: var(--admin-gold);
+  background: rgba(0, 0, 0, 0.02);
+}
+.admin-dropzone--compact svg {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 0.1rem;
+}
+.admin-dropzone--compact .admin-dropzone__title {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: none;
+  line-height: 1.25;
+}
+.admin-dropzone--compact .admin-dropzone__hint {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--admin-text-muted);
+  line-height: 1.25;
+}
+
+/* =========================================================================
+   Hierarchy & Status — full-width section (spans both columns), fields
+   sit compactly side-by-side in a single row (Parent Category, Display
+   Order, Is Active toggle), each capped to a reasonable max-width so
+   nothing stretches edge-to-edge.
+   ========================================================================= */
+
+.admin-form-section--full {
+  margin-top: 0.5rem;
+  max-width: 420px;
+}
+.admin-form-section--full .admin-form-section__body {
+  padding-top: 1rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Row 1: Parent Category + Display Order, side by side */
+.admin-hierarchy-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.1rem;
+}
+.admin-hierarchy-row .admin-field {
+  margin-bottom: 0;
+}
+.admin-hierarchy-row .admin-field select,
+.admin-hierarchy-row .admin-field input {
+  width: 100%;
+}
+
+/* Row 2: Is Active toggle, full width of the compact box */
+.admin-hierarchy-row .admin-toggle-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--admin-border);
+}
+
+/* ---- Responsive: everything collapses to single column on narrow viewports ---- */
+@media (max-width: 720px) {
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-poster-stack--row {
+    grid-template-columns: 1fr;
+  }
+  .admin-attr-row {
+    grid-template-columns: 1fr;
+  }
+  .admin-hierarchy-row {
+    grid-template-columns: 1fr;
+  }
+  .admin-form-section--full {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,51 @@
+/* =========================================================================
+   ADMIN BUTTON — used across Categories.jsx, Products.jsx, Orders.jsx, etc.
+   Depends on tokens from admin.css
+   ========================================================================= */
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--admin-radius-sm);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-btn-primary {
+  background: var(--admin-ink);
+  color: var(--admin-text-on-dark);
+  border: 1px solid var(--admin-ink);
+}
+.admin-btn-primary:hover:not(:disabled) {
+  background: var(--admin-gold);
+  border-color: var(--admin-gold);
+  color: var(--admin-ink);
+}
+
+.admin-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+}
+.admin-btn-ghost:hover:not(:disabled) {
+  border-color: var(--admin-gold);
+  color: var(--admin-gold);
+}
+
+.admin-btn-danger {
+  background: var(--admin-danger-bg);
+  color: var(--admin-danger);
+  border: 1px solid transparent;
+}
+.admin-btn-danger:hover:not(:disabled) {
+  background: var(--admin-danger);
+  color: #fff;
+}

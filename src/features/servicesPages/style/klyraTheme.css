@@ -1,0 +1,53 @@
+/* Klyra brand tokens — shared by About Us and Contact Us.
+   Palette: ink navy + champagne gold + ivory, with a rare deep-emerald
+   accent. Deliberately not cream+terracotta or near-black+acid-green. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --klyra-ink: #14171f;
+  --klyra-ink-soft: #1d212c;
+  --klyra-ink-line: rgba(246, 243, 236, 0.14);
+
+  --klyra-ivory: #f6f3ec;
+  --klyra-paper: #fbf9f4;
+
+  --klyra-gold: #c9a66b;
+  --klyra-gold-soft: #e3cfa1;
+  --klyra-gold-deep: #a5813f;
+
+  --klyra-emerald: #2f4538;
+
+  --klyra-stone: #8b8578;
+  --klyra-stone-light: #b8b2a3;
+
+  --klyra-display: "Cormorant Garamond", Georgia, serif;
+  --klyra-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --klyra-radius: 2px;
+}
+
+/* Faceted-line signature — a thin gold zigzag, standing in for a gem's
+   facet edge. Used as the recurring divider across both pages. */
+.klyra-facet-divider {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 10px;
+  margin: 0 auto;
+}
+
+.klyra-facet-divider.left {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .klyra-fade-in {
+    animation: klyra-fade-in 0.6s ease-out both;
+  }
+}
+
+@keyframes klyra-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

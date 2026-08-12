@@ -1,0 +1,55 @@
+/* =========================================================================
+   ADMIN TABLE — used by Categories.jsx, Products.jsx, Orders.jsx,
+   DashBoardPage.jsx (recent orders table)
+   Depends on tokens from admin.css
+   ========================================================================= */
+
+/* ---- Horizontal scroll wrapper ----
+   The table has more columns than a mobile screen can fit. Without this,
+   the table forces the whole PAGE to scroll horizontally (header included)
+   instead of just the table — and the white card background doesn't
+   follow that scroll, so cream page background shows through at the
+   edges. This wrapper contains the horizontal scroll to just the table,
+   inside the card, with matching white background throughout. */
+.admin-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--admin-surface);
+}
+
+.admin-table {
+  width: 100%;
+  /* Ensures columns don't get crushed illegibly on narrow screens —
+     below this width the table scrolls horizontally within
+     .admin-table-scroll instead of squeezing every column. */
+  min-width: 680px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.admin-table thead th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--admin-text-muted);
+  border-bottom: 1px solid var(--admin-border);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.admin-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  vertical-align: middle;
+}
+.admin-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.admin-table tbody tr:hover {
+  background: var(--admin-cream-dim);
+}

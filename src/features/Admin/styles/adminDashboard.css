@@ -1,0 +1,457 @@
+/* ==========================================================================
+   Admin Dashboard — layout + visual design
+   Reuses the app's existing tokens (--admin-gold, --admin-cream-dim,
+   --admin-text-muted, --admin-danger, --admin-success) with safe fallbacks
+   so this file degrades gracefully if a token isn't defined yet.
+   ========================================================================== */
+
+:root {
+  --db-ink: var(--admin-ink, #2c2015);
+  --db-muted: var(--admin-text-muted, #8a7a68);
+  --db-gold: var(--admin-gold, #b8874b);
+  --db-gold-soft: var(--admin-gold-soft, #e9d7b8);
+  --db-cream-dim: var(--admin-cream-dim, #f3e9db);
+  --db-success: var(--admin-success, #3f7d58);
+  --db-success-soft: #e3efe6;
+  --db-danger: var(--admin-danger, #b3413a);
+  --db-danger-soft: #f6e4e2;
+  --db-blue: #5c7a99;
+  --db-blue-soft: #eaf0f5;
+  --db-teal: #4c8570;
+  --db-teal-soft: #e9f3ee;
+  --db-card-radius: 16px;
+  --db-shadow-sm: 0 1px 2px rgba(44, 32, 21, 0.05);
+  --db-shadow-md: 0 10px 28px -14px rgba(44, 32, 21, 0.22);
+}
+
+/* ---- Page scaffold ---- */
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ---- Toolbar: last-updated + refresh ---- */
+.admin-dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  margin-top: -0.75rem;
+}
+
+.admin-dashboard-updated {
+  font-size: 0.78rem;
+  color: var(--db-muted);
+}
+
+.admin-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--db-cream-dim);
+  background: #fff;
+  color: var(--db-ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.admin-refresh-btn:hover:not(:disabled) {
+  border-color: var(--db-gold);
+  background: var(--db-cream-dim);
+}
+
+.admin-refresh-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.admin-refresh-btn.is-spinning svg {
+  animation: db-spin 0.9s linear infinite;
+}
+
+@keyframes db-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- KPI cards row ---- */
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.admin-kpi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 1.3rem 1.4rem 1.4rem;
+  border-radius: var(--db-card-radius);
+  box-shadow: var(--db-shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.admin-kpi-card:hover {
+  box-shadow: var(--db-shadow-md);
+  transform: translateY(-2px);
+}
+
+.admin-kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin-bottom: 0.85rem;
+}
+
+.admin-kpi-icon--users { background: var(--db-blue-soft); color: var(--db-blue); }
+.admin-kpi-icon--products { background: #fbf0dd; color: var(--db-gold); }
+.admin-kpi-icon--orders { background: var(--db-teal-soft); color: var(--db-teal); }
+.admin-kpi-icon--revenue { background: var(--db-success-soft); color: var(--db-success); }
+
+.admin-kpi-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--db-muted);
+  text-transform: uppercase;
+}
+
+.admin-kpi-value {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--db-ink);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-kpi-hint {
+  font-size: 0.78rem;
+  color: var(--db-muted);
+  margin-top: 0.15rem;
+}
+
+.admin-kpi-card--accent {
+  background: linear-gradient(180deg, var(--db-success-soft) 0%, #fff 60%);
+}
+
+/* Skeleton loading state */
+.admin-stat-skeleton {
+  border-radius: var(--db-card-radius);
+  height: 6.5rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--db-cream-dim);
+}
+
+.admin-stat-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.65) 50%,
+    transparent 70%
+  );
+  animation: db-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes db-shimmer {
+  from { transform: translateX(-60%); }
+  to { transform: translateX(60%); }
+}
+
+/* ---- Error state ---- */
+.admin-dashboard-error {
+  padding: 1.5rem;
+  border: 1px solid var(--db-danger);
+  border-radius: var(--db-card-radius);
+  background: var(--db-danger-soft);
+}
+
+.admin-dashboard-error__message {
+  color: var(--db-danger);
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-dashboard-error__note {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--db-muted);
+}
+
+.admin-dashboard-error__note code {
+  background: rgba(44, 32, 21, 0.06);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* ---- Two-panel analytics row ---- */
+.admin-dashboard-panels {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.admin-panel {
+  border-radius: var(--db-card-radius);
+  box-shadow: var(--db-shadow-sm);
+  padding: 1.4rem 1.5rem;
+}
+
+.admin-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--db-muted);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--db-cream-dim);
+  position: relative;
+}
+
+.admin-panel-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.25rem;
+  height: 2px;
+  background: var(--db-gold);
+}
+
+.admin-panel-title--flat {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.admin-panel-title--flat::after {
+  display: none;
+}
+
+/* ---- Order status breakdown ---- */
+.admin-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.admin-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.admin-status-row__label {
+  width: 6.5rem;
+  flex-shrink: 0;
+}
+
+.admin-status-row__track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--db-cream-dim);
+  overflow: hidden;
+}
+
+.admin-status-row__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--db-gold-soft), var(--db-gold));
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.admin-status-row__count {
+  width: 2rem;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--db-ink);
+}
+
+/* ---- Low stock panel ---- */
+.admin-lowstock-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.admin-lowstock-row__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.admin-lowstock-row__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--db-ink);
+}
+
+.admin-lowstock-row__track {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--db-cream-dim);
+  overflow: hidden;
+}
+
+.admin-lowstock-row__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e2a9a4, var(--db-danger));
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.admin-dashboard-empty {
+  font-size: 0.85rem;
+  color: var(--db-muted);
+  margin: 0;
+}
+
+/* ---- Recent orders ---- */
+.admin-orders-panel {
+  border-radius: var(--db-card-radius);
+  box-shadow: var(--db-shadow-sm);
+  overflow: hidden;
+}
+
+.admin-orders-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.5rem 0;
+}
+
+.admin-orders-panel__count {
+  font-size: 0.75rem;
+  color: var(--db-muted);
+}
+
+.admin-orders-panel .admin-table {
+  margin-top: 0.9rem;
+}
+
+.admin-orders-panel .admin-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.admin-orders-panel .admin-table tbody tr:hover {
+  background-color: var(--db-cream-dim);
+}
+
+.admin-order-customer {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.admin-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--db-gold-soft);
+  color: var(--db-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.admin-order-customer__email {
+  font-size: 0.72rem;
+  color: var(--db-muted);
+  margin-top: 0.1rem;
+}
+
+.admin-order-amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-order-date {
+  font-size: 0.82rem;
+  color: var(--db-muted);
+}
+
+.admin-table-empty {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--db-muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1080px) {
+  .admin-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-dashboard-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-status-row__label {
+    width: 5.25rem;
+  }
+  .admin-dashboard-toolbar {
+    justify-content: space-between;
+  }
+}
+
+/* ---- Motion preference ---- */
+@media (prefers-reduced-motion: reduce) {
+  .admin-kpi-card,
+  .admin-status-row__fill,
+  .admin-lowstock-row__fill,
+  .admin-stat-skeleton::after,
+  .admin-refresh-btn.is-spinning svg {
+    transition: none;
+    animation: none;
+  }
+}
+
+.admin-lowstock-row__clickable {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+.admin-lowstock-row__clickable:hover {
+  background-color: var(--admin-cream-dim, #F5E4D9);
+}

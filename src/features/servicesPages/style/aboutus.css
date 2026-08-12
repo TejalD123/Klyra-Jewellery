@@ -1,0 +1,350 @@
+.klyra-about {
+  background: var(--bg);
+  color: white;
+  font-family: var(--font-body);
+}
+
+.klyra-eyebrow {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin: 0 0 14px;
+}
+
+.klyra-eyebrow.center {
+  text-align: center;
+}
+
+.klyra-facet-divider {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 10px;
+  margin: 0 auto;
+}
+
+/* ===== Hero ===== */
+.klyra-hero {
+  background: var(--primary);
+  color: var(--text-light);
+  text-align: center;
+  padding: 104px 24px 68px;
+}
+
+.klyra-hero .klyra-eyebrow {
+  color: var(--gold-light);
+}
+
+.klyra-hero h1 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.1;
+  margin: 0 auto 24px;
+  max-width: 780px;
+  color: var(--text-light);
+}
+
+.klyra-hero-sub {
+  max-width: 560px;
+  margin: 0 auto 40px;
+  color: rgba(251, 243, 236, 0.75);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===== Story ===== */
+.klyra-story {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 96px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.klyra-story-text h2 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0 0 20px;
+  color: var(--primary);
+}
+
+.klyra-story-text p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.klyra-story-frame {
+  position: relative;
+  border: 1px solid var(--gold);
+  padding: 14px;
+  border-radius: 4px;
+}
+
+.klyra-story-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 1;
+}
+
+.klyra-story-corner--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--gold-dark);
+  border-left: 2px solid var(--gold-dark);
+}
+
+.klyra-story-corner--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--gold-dark);
+  border-right: 2px solid var(--gold-dark);
+}
+
+.klyra-story-image {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  border-radius: 4px;
+  background:
+    linear-gradient(135deg, rgba(201, 160, 103, 0.35), rgba(42, 15, 26, 0.9)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 8px);
+  background-color: var(--primary-dark);
+}
+
+/* ===== Section divider ===== */
+.klyra-section-divider {
+  margin: 8px auto 8px;
+}
+
+/* ===== Craft ===== */
+.klyra-craft {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 80px 24px 96px;
+  text-align: center;
+}
+
+.klyra-craft h2 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0 0 56px;
+  color: var(--primary);
+}
+
+.klyra-craft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: left;
+}
+
+.klyra-craft-card {
+  border-top: 2px solid var(--bg-alt);
+  padding-top: 20px;
+}
+
+.klyra-craft-num {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0.08em;
+}
+
+.klyra-craft-card h3 {
+  font-family: var(--font-headline);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 10px 0 10px;
+  color: var(--text);
+}
+
+.klyra-craft-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ===== Values ===== */
+.klyra-values {
+  background: var(--bg-alt);
+  padding: 80px 24px;
+}
+
+.klyra-values h2 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  margin: 0;
+  color: var(--primary);
+}
+
+.klyra-values-grid {
+  max-width: 1080px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.klyra-value-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(169, 117, 74, 0.2);
+  border-radius: 4px;
+  padding: 28px 24px;
+}
+
+.klyra-value-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(169, 117, 74, 0.1);
+  color: var(--gold-dark);
+  margin-bottom: 14px;
+}
+
+.klyra-value-card h3 {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: var(--primary);
+}
+
+.klyra-value-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ===== Timeline ===== */
+.klyra-timeline {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.klyra-timeline-track {
+  margin-top: 48px;
+  border-left: 1px solid var(--bg-alt);
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.klyra-timeline-item {
+  position: relative;
+}
+
+.klyra-timeline-dot {
+  position: absolute;
+  left: -33px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.klyra-timeline-item.is-current .klyra-timeline-dot {
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(169, 117, 74, 0.25);
+}
+
+.klyra-timeline-year {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--gold-dark);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.klyra-timeline-item p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ===== CTA ===== */
+.klyra-cta {
+  background: var(--primary);
+  color: var(--text-light);
+  text-align: center;
+  padding: 96px 24px;
+}
+
+.klyra-cta h2 {
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 34px;
+  margin: 0 0 14px;
+   color: var(--text-light);
+}
+
+.klyra-cta p {
+  color: rgba(251, 243, 236, 0.75);
+  margin: 0 0 32px;
+  font-size: 15px;
+}
+
+.klyra-cta-btn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.klyra-cta-btn:hover {
+  background: var(--gold);
+  color: var(--primary-dark);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 800px) {
+  .klyra-story {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 64px 20px;
+  }
+
+  .klyra-craft-grid,
+  .klyra-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .klyra-hero {
+    padding: 72px 20px 48px;
+  }
+
+  .klyra-hero h1 {
+    font-size: 38px;
+  }
+}

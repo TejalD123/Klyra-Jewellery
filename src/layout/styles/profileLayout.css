@@ -1,0 +1,89 @@
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 60vh;
+}
+@media (min-width: 1024px) {
+  .account-layout {
+    flex-direction: row;
+    padding: 2.5rem;
+    gap: 2.5rem;
+  }
+}
+
+.account-sidebar {
+  width: 100%;
+  flex-shrink: 0;
+}
+@media (min-width: 1024px) {
+  .account-sidebar {
+    width: 16rem;
+  }
+}
+
+.account-sidebar__title {
+  font-family: var(--font-headline);
+  font-size: 1.125rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.account-sidebar__nav {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 0.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--bg-alt);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .account-sidebar__nav {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+}
+
+.account-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.account-sidebar__link:hover {
+  background-color: var(--bg-alt);
+  color: var(--text);
+}
+.account-sidebar__link--active {
+  background-color: var(--gold-dark);
+  color: #fff;
+}
+
+.account-sidebar__logout {
+  margin-top: 0.25rem;
+  color: #B03A48;
+}
+.account-sidebar__logout:hover {
+  background-color: #F8E9EA;
+  color: #B03A48;
+}
+
+.account-content {
+  flex: 1;
+  min-width: 0;
+}
