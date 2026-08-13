@@ -28,7 +28,11 @@ const SignupForm = () => {
     e.preventDefault();
     dispatch(clearAuthError());
 
-    const result = await dispatch(sendOtp({ method: authMethod, identifier }));
+    // fullName ab sendOtp ko explicitly pass ho raha hai — isse backend
+    // pending-registration record fullName ke saath bana sakta hai
+    const result = await dispatch(
+      sendOtp({ method: authMethod, identifier, fullName, mode: "registration" }),
+    );
 
     if (sendOtp.fulfilled.match(result)) {
       navigate("/otp", {
