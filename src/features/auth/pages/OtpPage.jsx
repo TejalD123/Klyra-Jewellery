@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AuthLayout from "../../../layout/AuthLayout";
@@ -30,12 +30,16 @@ const OtpPage = () => {
   const identifier = state?.identifier ?? "";
   const method = state?.method ?? "email";
   const extraDetails = state?.extraDetails ?? {};
-  // LoginForm se relay hoke aayega — agar LoginForm abhi "from" pass nahi kar
-  // raha to yeh hamesha undefined rahega aur neeche "/" pe fallback hoga
   const from = state?.from;
 
   const [secondsLeft, setSecondsLeft] = useState(RESEND_SECONDS);
   const isVerifying = status === "verifying";
+
+  // status Redux se async aata hai (dispatch ke ek tick baad), isliye agar
+  // onComplete do baar ek hi tick mein fire ho jaaye to isVerifying dono
+  // baar false hi milega. Ref synchronous hai — isliye duplicate submit
+  // ko turant rokta hai, chahe status abhi tak update na hua ho.
+  const hasSubmittedRef = useRef(false);
 
   useEffect(() => {
     if (secondsLeft <= 0) return;
@@ -44,15 +48,19 @@ const OtpPage = () => {
   }, [secondsLeft]);
 
   const handleComplete = async (code) => {
+    if (hasSubmittedRef.current) return;
+    hasSubmittedRef.current = true;
+
     dispatch(clearAuthError());
     const result = await dispatch(verifyOtp({ method, identifier, otpCode: code, extraDetails, mode }));
 
     if (verifyOtp.fulfilled.match(result)) {
       const role = result.payload?.user?.role;
-      // admin hamesha admin dashboard pe; normal user "from" pe (agar tha)
-      // warna home pe
       const redirectTo = role === "admin" ? "/admin/dashboard" : from || "/";
       navigate(redirectTo, { replace: true });
+    } else {
+      // galat OTP ho sakta hai — user ko dobara try karne dena hai
+      hasSubmittedRef.current = false;
     }
   };
 
@@ -61,7 +69,7 @@ const OtpPage = () => {
     if (method === "phone") {
       sendPhoneOTP(identifier);
     } else {
-      dispatch(sendOtp({ method, identifier }));
+      dispatch(sendOtp({ method, identifier, fullName: extraDetails?.fullName, mode }));
     }
     setSecondsLeft(RESEND_SECONDS);
   };
@@ -75,15 +83,11 @@ const OtpPage = () => {
         <p className="auth-subtitle">
           Enter the 6-digit code sent to <span className="otp-highlight">{maskIdentifier(identifier, method)}</span>
         </p>
-
         <OTPInput length={6} onComplete={handleComplete} disabled={isVerifying} />
-
         {error && <p className="auth-error" style={{ marginTop: "1rem" }}>{error}</p>}
-
         <button type="button" onClick={handleResend} disabled={secondsLeft > 0} className="otp-resend">
           {secondsLeft > 0 ? `Resend code in ${secondsLeft}s` : "Resend Code"}
         </button>
-
         <div id="recaptcha-container" />
       </div>
     </AuthLayout>
