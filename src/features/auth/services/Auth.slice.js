@@ -28,20 +28,27 @@ export const verifyOtp = createAsyncThunk(
   "auth/verifyOtp",
   async ({ method, identifier, otpCode, extraDetails, mode }, thunkAPI) => {
     try {
-      let payload;
+      let response;
 
       if (method === "phone") {
         const idToken = await verifyPhoneOTP(otpCode); // Firebase verifies client-side
-        payload = { ...extraDetails, idToken, phone: identifier };
+        const payload = { ...extraDetails, idToken, phone: identifier };
+        response =
+          mode === "login"
+            ? await authAPI.completeLogin(payload)
+            : await authAPI.completeRegistration(payload);
       } else {
-        await authAPI.verifyEmailOTP(identifier, otpCode);
-        payload = { ...extraDetails, email: identifier };
+        // Email: seedha verify-otp endpoint call karo — ye OTP verify
+        // karta hai AUR session (user + accessToken) issue karta hai,
+        // ek hi backend call mein. (Purana flow /otp/verify-email +
+        // /auth/login|register do alag calls karta tha — pehli call OTP
+        // ko verified mark kar deti thi but session kabhi issue nahi
+        // hoti thi, isliye token hamesha undefined rehta tha.)
+        response =
+          mode === "login"
+            ? await authAPI.verifyLoginOtp(identifier, otpCode)
+            : await authAPI.verifyRegistrationOtp(identifier, otpCode);
       }
-
-      const response =
-        mode === "login"
-          ? await authAPI.completeLogin(payload)
-          : await authAPI.completeRegistration(payload);
 
       // Backend ApiResponse wrapper: { statusCode, success, message, data: { user, accessToken, refreshToken } }
       return response.data.data;
