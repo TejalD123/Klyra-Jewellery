@@ -4,7 +4,7 @@ import { sendPhoneOTP, verifyPhoneOTP } from "../../../config/Firebase.config";
 
 export const sendOtp = createAsyncThunk(
   "auth/sendOtp",
-  async ({ method, identifier }, thunkAPI) => {
+  async ({ method, identifier, fullName, mode }, thunkAPI) => {
     try {
       if (method === "phone") {
         const formatted = identifier.startsWith("+")
@@ -14,7 +14,9 @@ export const sendOtp = createAsyncThunk(
         return { identifier: formatted };
       }
 
-      await authAPI.sendEmailOTP(identifier);
+      // fullName sirf registration ke waqt bhejna hai — login ke liye
+      // backend ko naam ki zaroorat nahi, purana user already exist karta hai
+      await authAPI.sendEmailOTP(identifier, mode === "login" ? "login" : "registration", fullName);
       return { identifier };
     } catch (err) {
       const message =
@@ -47,7 +49,7 @@ export const verifyOtp = createAsyncThunk(
         response =
           mode === "login"
             ? await authAPI.verifyLoginOtp(identifier, otpCode)
-            : await authAPI.verifyRegistrationOtp(identifier, otpCode);
+            : await authAPI.verifyRegistrationOtp(identifier, otpCode, extraDetails?.fullName);
       }
 
       // Backend ApiResponse wrapper: { statusCode, success, message, data: { user, accessToken, refreshToken } }
@@ -124,19 +126,9 @@ const authSlice = createSlice({
     clearAuthError: (state) => {
       state.error = null;
     },
-    // NEW — user.slice ke updateProfile thunk se call hota hai, profile edit
-    // (fullName waghera) ke baad auth.user object ko naye fields se merge
-    // karta hai. Navbar aur ProfilePage dono isi state.auth.user se read
-    // karte hain, isliye yeh sync zaroori hai warna edit ke baad naam
-    // purana hi dikhta rahega jab tak page refresh na ho.
     updateUserProfile: (state, action) => {
       state.user = { ...state.user, ...action.payload };
     },
-    // NEW — used by apiClient.js's response interceptor after a silent
-    // background refresh-token call succeeds (e.g. access token expired
-    // mid-session on an "Add to Bag" click). Just swaps the token in —
-    // doesn't touch user/status, since the session itself never actually
-    // ended, only the short-lived access token did.
     setToken: (state, action) => {
       state.token = action.payload;
     },
