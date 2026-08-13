@@ -26,7 +26,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(clearAuthError());
-    const result = await dispatch(sendOtp({ method: authMethod, identifier }));
+    const result = await dispatch(sendOtp({ method: authMethod, identifier, mode: "login" }));
     if (sendOtp.fulfilled.match(result)) {
       navigate("/otp", { state: { mode: "login", identifier, method: authMethod } });
     }
