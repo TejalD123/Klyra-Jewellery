@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "../styles/AdminMobileNav.css";
+import "../styles/adminmobilenav.css";
 
 const TABS = [
   {

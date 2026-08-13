@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import AuthLayout from "../../../layout/AuthLayout";
 import LoginForm from "../components/LoginForm";
-import poster from "../../../../public/poster.png";
+// import poster from "../../../../public/poster.png";
 
 const LoginPage = () => {
   // ProductDetailPage se navigate("/login", { state: { from: location.pathname } })

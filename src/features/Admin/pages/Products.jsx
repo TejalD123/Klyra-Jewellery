@@ -11,7 +11,7 @@ import {
   toggleProductStatus,
   deleteProduct,
 } from "../services/Productservice";
-import { fetchCategories } from "../services/categoryService";
+import { fetchCategories } from "../services/Categoryservice";
 
 import "../styles/admincard.css";
 import "../styles/adminbutton.css";

@@ -3,7 +3,7 @@ import { MessageSquareText, ChevronRight } from "lucide-react";
 import Topbar from "../components/TopBar";
 import QueryDetailModal from "../components/QueryDetailModal";
 import { queryAPI } from "../../query/services/query.api";
-import "../styles/adminQuery.css";
+import "../styles/adminquery.css";
 
 const TABS = [
   { key: "new", label: "New" },
