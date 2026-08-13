@@ -4,13 +4,22 @@ import axiosInstance from "../../../api/apiClient";
 export const sendEmailOTP = (email, purpose = "registration") =>
   axiosInstance.post("/otp/send-email", { email, purpose });
 
-export const verifyEmailOTP = (email, otpCode, purpose = "registration") =>
-  axiosInstance.post("/otp/verify-email", { email, otpCode, purpose });
+// ===== Final step (email flow): verifies the OTP AND issues the session
+// (user + accessToken + refreshToken cookie) in a single backend call.
+// Do NOT call this together with /otp/verify-email — that endpoint only
+// marks the OTP as verified and does not issue a session, so calling it
+// first would make this call fail with "OTP not found or already used".
+export const verifyRegistrationOtp = (email, otp) =>
+  axiosInstance.post("/auth/verify-registration-otp", { email, otp });
 
-// ===== Final step: user record create/login karna backend ke MongoDB mein =====
+export const verifyLoginOtp = (email, otp) =>
+  axiosInstance.post("/auth/verify-login-otp", { email, otp });
+
+// ===== Final step (phone/Google flow): user record create/login karna
+// backend ke MongoDB mein — Firebase idToken already verified hota hai
+// client-side, backend sirf decode + session issue karta hai.
 export const completeRegistration = (payload) =>
   axiosInstance.post("/auth/register", payload);
-
 export const completeLogin = (payload) =>
   axiosInstance.post("/auth/login", payload);
 
