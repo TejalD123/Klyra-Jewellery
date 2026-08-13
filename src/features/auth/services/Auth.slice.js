@@ -14,10 +14,19 @@ export const sendOtp = createAsyncThunk(
         return { identifier: formatted };
       }
 
-      // NOTE: backend /otp/send-email schema "fullName" accept nahi karta
-      // (validation error: "fullName" is not allowed). fullName sirf
-      // verify-registration-otp step pe bhejna hai, yahan nahi.
-      await authAPI.sendEmailOTP(identifier, mode === "login" ? "login" : "registration");
+      // IMPORTANT: /otp/send-email sirf OTP bhejta hai, User record
+      // create nahi karta — isliye verify-registration-otp ko baad mein
+      // "No pending registration found" milta tha (User.findOne fail).
+      // Backend ka /auth/register controller hi User.create() +
+      // createAndSendOtp() dono karta hai, isliye registration OTP
+      // step ke liye wahi call karna sahi hai. Login ke liye /auth/login
+      // bhi khud hi createAndSendOtp karta hai (existing verified user pe).
+      if (mode === "login") {
+        await authAPI.completeLogin({ email: identifier });
+      } else {
+        await authAPI.completeRegistration({ email: identifier, fullName });
+      }
+
       return { identifier };
     } catch (err) {
       const message =
@@ -26,6 +35,7 @@ export const sendOtp = createAsyncThunk(
     }
   },
 );
+
 export const verifyOtp = createAsyncThunk(
   "auth/verifyOtp",
   async ({ method, identifier, otpCode, extraDetails, mode }, thunkAPI) => {
@@ -40,16 +50,12 @@ export const verifyOtp = createAsyncThunk(
             ? await authAPI.completeLogin(payload)
             : await authAPI.completeRegistration(payload);
       } else {
-        // Email: seedha verify-otp endpoint call karo — ye OTP verify
-        // karta hai AUR session (user + accessToken) issue karta hai,
-        // ek hi backend call mein. (Purana flow /otp/verify-email +
-        // /auth/login|register do alag calls karta tha — pehli call OTP
-        // ko verified mark kar deti thi but session kabhi issue nahi
-        // hoti thi, isliye token hamesha undefined rehta tha.)
+        // Email: verify-otp endpoint OTP verify karta hai AUR session
+        // (user + accessToken) issue karta hai, ek hi call mein.
         response =
           mode === "login"
             ? await authAPI.verifyLoginOtp(identifier, otpCode)
-            : await authAPI.verifyRegistrationOtp(identifier, otpCode, extraDetails?.fullName);
+            : await authAPI.verifyRegistrationOtp(identifier, otpCode);
       }
 
       // Backend ApiResponse wrapper: { statusCode, success, message, data: { user, accessToken, refreshToken } }
@@ -107,7 +113,7 @@ const initialState = {
   pendingIdentifier: null,
   status: "idle", // idle | sendingOtp | otpSent | verifying | succeeded | failed
   error: null,
-  authChecked: false, // <-- added: App.jsx isse decide karta hai bootstrap complete hua ya nahi
+  authChecked: false,
 };
 
 const authSlice = createSlice({
@@ -135,7 +141,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // ---- sendOtp ----
       .addCase(sendOtp.pending, (state) => {
         state.status = "sendingOtp";
         state.error = null;
@@ -148,7 +153,6 @@ const authSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      // ---- verifyOtp ----
       .addCase(verifyOtp.pending, (state) => {
         state.status = "verifying";
         state.error = null;
@@ -162,7 +166,6 @@ const authSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      // ---- googleAuth ----
       .addCase(googleAuth.pending, (state) => {
         state.status = "verifying";
         state.error = null;
@@ -176,7 +179,6 @@ const authSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      // ---- bootstrapAuth ----
       .addCase(bootstrapAuth.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.accessToken;
@@ -193,5 +195,5 @@ const authSlice = createSlice({
 });
 
 export const { setAuthMethod, logout, clearAuthError, updateUserProfile, setToken } = authSlice.actions;
-export const resendOtp = sendOtp; // alias so OtpPage's resend button works
+export const resendOtp = sendOtp;
 export default authSlice.reducer;
