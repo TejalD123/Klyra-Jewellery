@@ -14,9 +14,10 @@ export const sendOtp = createAsyncThunk(
         return { identifier: formatted };
       }
 
-      // fullName sirf registration ke waqt bhejna hai — login ke liye
-      // backend ko naam ki zaroorat nahi, purana user already exist karta hai
-      await authAPI.sendEmailOTP(identifier, mode === "login" ? "login" : "registration", fullName);
+      // NOTE: backend /otp/send-email schema "fullName" accept nahi karta
+      // (validation error: "fullName" is not allowed). fullName sirf
+      // verify-registration-otp step pe bhejna hai, yahan nahi.
+      await authAPI.sendEmailOTP(identifier, mode === "login" ? "login" : "registration");
       return { identifier };
     } catch (err) {
       const message =
@@ -25,7 +26,6 @@ export const sendOtp = createAsyncThunk(
     }
   },
 );
-
 export const verifyOtp = createAsyncThunk(
   "auth/verifyOtp",
   async ({ method, identifier, otpCode, extraDetails, mode }, thunkAPI) => {
