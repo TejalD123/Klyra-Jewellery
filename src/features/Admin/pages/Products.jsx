@@ -10,7 +10,7 @@ import {
   toggleProductFeatured,
   toggleProductStatus,
   deleteProduct,
-} from "../services/productService";
+} from "../services/Productservice";
 import { fetchCategories } from "../services/categoryService";
 
 import "../styles/admincard.css";

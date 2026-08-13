@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { MapPin, Plus, Pencil, Trash2, CheckCircle2, BadgeCheck, Mail, Phone, AtSign,ArrowLeft } from "lucide-react";
 import { updateProfile, clearUserError } from "../services/user.slice";
 import { fetchAddresses, openAddressForm, deleteAddress, setDefaultAddress } from "../../address/services/address.slice";
-import "../styles/ProfilePage.css";
+import "../styles/profilepage.css";
 
 const ProfilePage = () => {
   const navigate = useNavigate();

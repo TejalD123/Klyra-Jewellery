@@ -11,7 +11,7 @@ const LoginPage = () => {
   const from = state?.from;
 
   return (
-    <AuthLayout imageUrl={poster} tagline="The art of timeless adornment." headerVariant="minimal" showFooter>
+    <AuthLayout tagline="The art of timeless adornment." headerVariant="minimal" showFooter>
       <LoginForm from={from} />
     </AuthLayout>
   );
