@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { X, Mail, Phone, Send } from "lucide-react";
 import { queryAPI } from "../../query/services/query.api";
-import "../styles/queryDetailModal.css";
+import "../styles/querydetailmodal.css";
 
 const STATUSES = ["new", "in_progress", "resolved"];
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CheckCircle2 } from "lucide-react";
 import { fetchOrderById, clearCurrentOrder } from "../../checkout/services/order.slice";
 import "../../checkout/styles/Order.css";
-import "../style/OrderConfirmation.css";
+import "../style/Orderconfirmation.css";
 
 const formatINR = (num) =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(num || 0);
